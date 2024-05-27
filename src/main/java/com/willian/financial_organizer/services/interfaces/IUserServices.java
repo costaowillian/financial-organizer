@@ -7,4 +7,6 @@ public interface IUserServices {
     User createUser(User user);
 
     void emailIsValid(String email);
+
+    String passwordEncoder(String password);
 }
