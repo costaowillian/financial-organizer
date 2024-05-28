@@ -2,6 +2,7 @@ package com.willian.financial_organizer.services;
 
 import com.willian.financial_organizer.configs.SecurityConfig;
 import com.willian.financial_organizer.exceptions.DuplicateResourceException;
+import com.willian.financial_organizer.exceptions.RequiredObjectIsNullException;
 import com.willian.financial_organizer.model.User;
 import com.willian.financial_organizer.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeAll;
@@ -52,6 +53,23 @@ public class UserServicesTest {
         assertEquals(user.getEmail(), savedUser.getEmail(), () -> "Should return " + user.getEmail() + " but return " + savedUser.getEmail() + "!");
         assertNotNull(savedUser.getPassword(), () -> "Should return a Encoder password");
         assertNotEquals(user.getPassword(), savedUser.getPassword(), () -> "Should return " + user.getPassword() +" but return " + savedUser.getPassword() + "!");
+    }
+
+    @DisplayName("test Given A Empty User When Create Should Throw Exception")
+    @Test
+    void testGivenEmptyUser_WhenCrete_ShouldThrowException() {
+        //Given / Arrange
+        String expectedMessage = "It is not allowed to persist a null object!";
+
+        //When / Act
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
+            service.createUser(null);
+        });
+
+        String actualMessage = exception.getMessage();
+
+        //Then /Assert
+        assertTrue(actualMessage.contains(expectedMessage), () -> "Should contains the message " + expectedMessage + "!");
     }
 
     @DisplayName("test Given A No Existent Email When Email Is Valid")
