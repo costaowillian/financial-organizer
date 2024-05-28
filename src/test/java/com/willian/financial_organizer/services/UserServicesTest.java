@@ -1,5 +1,6 @@
 package com.willian.financial_organizer.services;
 
+import com.willian.financial_organizer.configs.SecurityConfig;
 import com.willian.financial_organizer.exceptions.DuplicateResourceException;
 import com.willian.financial_organizer.model.User;
 import com.willian.financial_organizer.repositories.UserRepository;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -31,6 +33,25 @@ public class UserServicesTest {
     @BeforeAll
     void setUp() {
         user = new User("Willian Costa", "willian@gmail.com", "senha123");
+    }
+
+    @DisplayName("test Given User When Create Should Return A User Object")
+    @Test
+    void testGivenUser_WhenCrete_ShouldReturnAUserObject() {
+    	//Given / Arrange
+        when(repository.existsByEmail(anyString())).thenReturn(false);
+        when(repository.save(user)).thenReturn(user);
+
+    	//When / Act
+        User savedUser = service.createUser(user);
+        System.out.print(savedUser.toString());
+
+    	//Then /Assert
+        assertNotNull(savedUser, () -> "Should not return null");
+        assertEquals(user.getName(), savedUser.getName(), () -> "Should return " + user.getName() + " but return " + savedUser.getName() + "!");
+        assertEquals(user.getEmail(), savedUser.getEmail(), () -> "Should return " + user.getEmail() + " but return " + savedUser.getEmail() + "!");
+        assertNotNull(savedUser.getPassword(), () -> "Should return a Encoder password");
+        assertNotEquals(user.getPassword(), savedUser.getPassword(), () -> "Should return " + user.getPassword() +" but return " + savedUser.getPassword() + "!");
     }
 
     @DisplayName("test Given A No Existent Email When Email Is Valid")
@@ -61,6 +82,20 @@ public class UserServicesTest {
         //Then /Assert
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @DisplayName("test Given Any String Password Encoder Should Return a Password Encoder")
+    @Test
+    void testGivenAnyString_WhenPasswordEncoder_ShouldReturnPasswordEncoded() {
+        //Given / Arrange
+        String password = "teste123";
+
+        //When / Act
+        String result = service.passwordEncoder(password);
+
+        //Then /Assert
+        assertNotEquals(password, result, () -> "Should not be the same!");
+        assertNotNull(result, () -> "Should not null!");
     }
 
 }
