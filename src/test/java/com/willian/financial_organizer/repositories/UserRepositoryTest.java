@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -17,7 +18,7 @@ public class UserRepositoryTest {
     @Autowired
     UserRepository repository;
 
-    @DisplayName("test Given An Existent Email When Exist By Email Should Return Boolean ")
+    @DisplayName("test Given An Existent Email When Exist By Email Should Return Boolean")
     @Test
     void testGivenAnExistentEmail_WhenExistByEmail_ShouldReturnBoolean() {
     	//Given / Arrange
@@ -35,7 +36,7 @@ public class UserRepositoryTest {
         assertTrue(exists, () -> "Should return true!");
     }
 
-    @DisplayName("test Given A No Existent Email When Exist By Email Should Return Boolean ")
+    @DisplayName("test Given A No Existent Email When Exist By Email Should Return Boolean")
     @Test
     void testGivenANoExistentEmail_WhenExistByEmail_ShouldReturnBoolean() {
         //Given / Arrange
@@ -45,5 +46,36 @@ public class UserRepositoryTest {
 
         //Then /Assert
         assertFalse(exists, () -> "Should return false!");
+    }
+
+    @DisplayName("test Given An Existent Email When Find By Email Should Return User Object")
+    @Test
+    void testGivenAnExistentEmail_WhenFindByEmail_ShouldReturnUserObject() {
+        //Given / Arrange
+        User user  = new User();
+        user.setEmail("willian@gmail.com");
+        user.setName("Willian Costa");
+        user.setPassword("password");
+
+        repository.save(user);
+
+        //When / Act
+        User result = repository.findByEmail(user.getEmail()).get();
+
+        //Then /Assert
+        assertNotNull(result, () -> "Should not null");
+        assertEquals(user.getEmail(), result.getEmail(), () -> "Should return "+ user.getEmail() + " but return " + result.getEmail() + "!");
+    }
+
+    @DisplayName("test Given An Existent Email When Find By Email Should Return Null")
+    @Test
+    void testGivenAnExistentEmail_WhenFindByEmail_ShouldReturnNull() {
+        //Given / Arrange
+
+        //When / Act
+        Optional<User> result = repository.findByEmail("willia22@gmail.vom");
+
+        //Then /Assert
+        assertNull(result, () -> "Should return null");
     }
 }
