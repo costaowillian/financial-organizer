@@ -1,5 +1,7 @@
 package com.willian.financial_organizer.services;
 
+import com.willian.financial_organizer.dtos.CreateUserDTO;
+import com.willian.financial_organizer.dtos.UserResponseDTO;
 import com.willian.financial_organizer.exceptions.DuplicateResourceException;
 import com.willian.financial_organizer.exceptions.RequiredObjectIsNullException;
 import com.willian.financial_organizer.model.User;
@@ -23,7 +25,7 @@ public class UserServices implements IUserServices {
 
     @Override
     @Transactional
-    public User createUser(User user) {
+    public UserResponseDTO createUser(CreateUserDTO user) {
 
         if(user == null) throw new RequiredObjectIsNullException();
 
@@ -31,7 +33,9 @@ public class UserServices implements IUserServices {
 
         user.setPassword(passwordEncoder(user.getPassword()));
 
-        return repository.save(user);
+        User savedUser = repository.save(createDtoToUser(user));
+
+        return userToResponseDto(savedUser);
     }
 
     @Override
@@ -58,5 +62,13 @@ public class UserServices implements IUserServices {
         String result = passwordEncoder.encode(password);
 
         return result.substring("{pbkdf2}".length());
+    }
+
+    public User createDtoToUser(CreateUserDTO dto) {
+        return new User(dto.getName(), dto.getName(), dto.getPassword());
+    }
+
+    public UserResponseDTO userToResponseDto(User user) {
+        return new UserResponseDTO(user);
     }
 }
