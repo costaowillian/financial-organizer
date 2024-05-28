@@ -2,8 +2,7 @@ package com.willian.financial_organizer.controllers;
 
 import com.willian.financial_organizer.controllers.interfaces.IAuthController;
 import com.willian.financial_organizer.dtos.security.AccountCredentialsDTO;
-import com.willian.financial_organizer.dtos.security.TokenDTO;
-import com.willian.financial_organizer.services.AuthServices;
+import com.willian.financial_organizer.services.interfaces.IAuthServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController implements IAuthController {
     @Autowired
-    private AuthServices authServices;
+    private IAuthServices authServices;
 
     @Override
     @PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -3,7 +3,7 @@ package com.willian.financial_organizer.controllers;
 import com.willian.financial_organizer.controllers.interfaces.IUserController;
 import com.willian.financial_organizer.dtos.CreateUserDTO;
 import com.willian.financial_organizer.dtos.UserResponseDTO;
-import com.willian.financial_organizer.services.UserServices;
+import com.willian.financial_organizer.services.interfaces.IUserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.net.URI;
 @RequestMapping("/api/v1/user")
 public class UserController implements IUserController {
     @Autowired
-    private UserServices services;
+    private IUserServices services;
 
     @Override
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

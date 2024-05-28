@@ -9,6 +9,9 @@ import com.willian.financial_organizer.repositories.UserRepository;
 import com.willian.financial_organizer.services.interfaces.IUserServices;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
@@ -16,9 +19,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
-public class UserServices implements IUserServices {
+public class UserServices implements IUserServices, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
@@ -70,5 +74,15 @@ public class UserServices implements IUserServices {
 
     public UserResponseDTO userToResponseDto(User user) {
         return new UserResponseDTO(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = repository.findByEmail(email);
+        if(user.isPresent()) {
+            return (UserDetails) user.get();
+        } else {
+            throw new UsernameNotFoundException("Username " + email + " not found!");
+        }
     }
 }
