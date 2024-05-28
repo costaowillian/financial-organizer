@@ -1,6 +1,8 @@
 package com.willian.financial_organizer.services;
 
 import com.willian.financial_organizer.configs.SecurityConfig;
+import com.willian.financial_organizer.dtos.CreateUserDTO;
+import com.willian.financial_organizer.dtos.UserResponseDTO;
 import com.willian.financial_organizer.exceptions.DuplicateResourceException;
 import com.willian.financial_organizer.exceptions.RequiredObjectIsNullException;
 import com.willian.financial_organizer.model.User;
@@ -44,15 +46,13 @@ public class UserServicesTest {
         when(repository.save(user)).thenReturn(user);
 
     	//When / Act
-        User savedUser = service.createUser(user);
+        UserResponseDTO savedUser = service.createUser(new CreateUserDTO(user));
         System.out.print(savedUser.toString());
 
     	//Then /Assert
         assertNotNull(savedUser, () -> "Should not return null");
         assertEquals(user.getName(), savedUser.getName(), () -> "Should return " + user.getName() + " but return " + savedUser.getName() + "!");
         assertEquals(user.getEmail(), savedUser.getEmail(), () -> "Should return " + user.getEmail() + " but return " + savedUser.getEmail() + "!");
-        assertNotNull(savedUser.getPassword(), () -> "Should return a Encoder password");
-        assertNotEquals(user.getPassword(), savedUser.getPassword(), () -> "Should return " + user.getPassword() +" but return " + savedUser.getPassword() + "!");
     }
 
     @DisplayName("test Given A Empty User When Create Should Throw Exception")
