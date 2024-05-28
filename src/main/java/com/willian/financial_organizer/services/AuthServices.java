@@ -40,7 +40,7 @@ public class AuthServices implements IAuthServices {
             if(user.isPresent()) {
                 tokenResponse = tokenProvider.createAccessToken(email);
             }else {
-                throw new UsernameNotFoundException("User not found! Please create your account!");
+                throw new UsernameNotFoundException("Invalid email/password supplied");
             }
 
             return ResponseEntity.ok(tokenResponse);
