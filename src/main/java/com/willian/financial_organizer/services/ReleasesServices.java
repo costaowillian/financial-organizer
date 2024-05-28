@@ -37,8 +37,11 @@ public class ReleasesServices  implements IReleasesServices {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
+        Releases entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
+        repository.delete(entity);
     }
 
     @Override

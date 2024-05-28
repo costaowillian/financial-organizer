@@ -11,7 +11,7 @@ public interface IReleasesServices {
 
     Releases update(Releases releases);
 
-    void delete(String id);
+    void delete(Long id);
 
     List<Releases> findAll();
 
