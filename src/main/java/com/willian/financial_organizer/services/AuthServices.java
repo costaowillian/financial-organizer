@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 public class AuthServices implements IAuthServices {
@@ -27,6 +28,8 @@ public class AuthServices implements IAuthServices {
 
     @Autowired
     private UserRepository repository;
+
+    private Logger logger = Logger.getLogger(UserServices.class.getName());
 
     @Override
     public ResponseEntity signIn(AccountCredentialsDTO data) {
@@ -47,7 +50,8 @@ public class AuthServices implements IAuthServices {
 
             return ResponseEntity.ok(tokenResponse);
         } catch (Exception e) {
-            throw new BadCredentialsException("Invalid email/password supplied");
+            logger.info("messsage" + e.getMessage());
+            throw new BadCredentialsException("Invalid email/password supplieddddd");
         }
     }
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,7 +23,7 @@ public class UserController implements IUserController {
 
     @Override
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserResponseDTO> create(CreateUserDTO userDTO) {
+    public ResponseEntity<UserResponseDTO> create(@RequestBody CreateUserDTO userDTO) {
         UserResponseDTO user = services.createUser(userDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")

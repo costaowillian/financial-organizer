@@ -65,11 +65,11 @@ public class UserServices implements IUserServices, UserDetailsService {
         passwordEncoder.setDefaultPasswordEncoderForMatches(pbkdf2PasswordEncoder);
         String result = passwordEncoder.encode(password);
 
-        return result.substring("{pbkdf2}".length());
+        return result;
     }
 
     public User createDtoToUser(CreateUserDTO dto) {
-        return new User(dto.getName(), dto.getName(), dto.getPassword());
+        return new User(dto.getName(), dto.getPassword(), dto.getEmail());
     }
 
     public UserResponseDTO userToResponseDto(User user) {

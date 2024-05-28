@@ -17,7 +17,7 @@ public class AuthController implements IAuthController {
 
     @Override
     @PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity singIn(AccountCredentialsDTO data) {
+    public ResponseEntity singIn(@RequestBody AccountCredentialsDTO data) {
         if(checkIfParamsIsNotNull(data)) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request");
 
         ResponseEntity token = authServices.signIn(data);

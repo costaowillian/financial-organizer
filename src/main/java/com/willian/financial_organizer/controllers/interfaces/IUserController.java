@@ -15,7 +15,7 @@ public interface IUserController {
     @Operation(
             summary = "Create an User",
             description = "This endpoint create a new user!",
-            tags = {"user"},
+            tags = {"User"},
             responses = {
                     @ApiResponse(description = "Success", responseCode = "201",
                             content = {
