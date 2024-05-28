@@ -8,12 +8,9 @@ import com.willian.financial_organizer.repositories.ReleasesRepository;
 import com.willian.financial_organizer.services.interfaces.IReleasesServices;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class ReleasesServices  implements IReleasesServices {
@@ -24,6 +21,8 @@ public class ReleasesServices  implements IReleasesServices {
     @Override
     @Transactional
     public Releases save(Releases releases) {
+        if(releases == null) throw new RequiredObjectIsNullException();
+        
         return repository.save(releases);
     }
 
@@ -68,5 +67,4 @@ public class ReleasesServices  implements IReleasesServices {
         entity.setStatus(status);
         repository.save(entity);
     }
-
 }

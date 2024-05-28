@@ -18,6 +18,4 @@ public interface IReleasesServices {
     Releases findById(Long id);
 
     void updateStatus(Long id, ReleasesStatus status);
-
-    List<Releases> findAll(Releases options);
 }
