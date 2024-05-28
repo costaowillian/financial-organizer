@@ -37,6 +37,7 @@ public class ReleasesServices  implements IReleasesServices {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         Releases entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
@@ -45,13 +46,15 @@ public class ReleasesServices  implements IReleasesServices {
     }
 
     @Override
+    @Transactional
     public List<Releases> findAll() {
-        return List.of();
+        return repository.findAll();
     }
 
     @Override
-    public Releases findById(String id) {
-        return null;
+    public Releases findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
     @Override

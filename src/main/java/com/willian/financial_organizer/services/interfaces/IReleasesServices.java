@@ -15,7 +15,7 @@ public interface IReleasesServices {
 
     List<Releases> findAll();
 
-    Releases findById(String id);
+    Releases findById(Long id);
 
     void updateStatus(String id, ReleasesStatus status);
 }
