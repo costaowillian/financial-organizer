@@ -8,6 +8,8 @@ import com.willian.financial_organizer.repositories.ReleasesRepository;
 import com.willian.financial_organizer.services.interfaces.IReleasesServices;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,7 +48,6 @@ public class ReleasesServices  implements IReleasesServices {
     }
 
     @Override
-    @Transactional
     public List<Releases> findAll() {
         return repository.findAll();
     }
@@ -58,7 +59,14 @@ public class ReleasesServices  implements IReleasesServices {
     }
 
     @Override
-    public void updateStatus(String id, ReleasesStatus status) {
+    @Transactional
+    public void updateStatus(Long id, ReleasesStatus status) {
+        if(status == null) throw new RequiredObjectIsNullException("Status can't be null!");
 
+        Releases entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        entity.setStatus(status);
+        repository.save(entity);
     }
+
 }
