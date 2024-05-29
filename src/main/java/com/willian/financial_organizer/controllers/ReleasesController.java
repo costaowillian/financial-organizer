@@ -27,7 +27,6 @@ public class ReleasesController implements IReleasesController {
 
     private Logger logger = Logger.getLogger(UserServices.class.getName());
 
-
     @Override
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ReleasesDTO> create(@RequestBody ReleasesDTO releasesDTO) {
