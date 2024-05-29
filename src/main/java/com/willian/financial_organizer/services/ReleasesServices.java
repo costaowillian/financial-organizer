@@ -28,6 +28,9 @@ public class ReleasesServices  implements IReleasesServices {
     private ReleasesRepository repository;
 
     @Autowired
+    private UserServices userService;
+
+    @Autowired
     private PagedResourcesAssembler<ReleasesDTO> assembler;
 
     @Override
@@ -98,7 +101,7 @@ public class ReleasesServices  implements IReleasesServices {
 
         if(releases == null) throw new RequiredObjectIsNullException();
 
-        if(releases.getUserId() == null || releases.getUserId().getId() == null) {
+        if(releases.getUserId() == null) {
             throw new RequiredObjectIsNullException("User ID is required!");
         }
 
@@ -180,7 +183,7 @@ public class ReleasesServices  implements IReleasesServices {
         releases.setValue(releasesDTO.getValue());
         releases.setYear(releasesDTO.getYear());
         releases.setRegistrationDate(releasesDTO.getRegistrationDate());
-        releases.setUserId(releasesDTO.getUserId());
+        releases.setUserId(userService.findById(releasesDTO.getId()));
         releases.setType(releasesDTO.getType());
         return releases;
     }

@@ -11,4 +11,6 @@ public interface IUserServices {
     void emailIsValid(String email);
 
     String passwordEncoder(String password);
+
+    User findById(Long id);
 }

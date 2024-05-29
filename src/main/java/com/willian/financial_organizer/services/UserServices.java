@@ -4,6 +4,7 @@ import com.willian.financial_organizer.dtos.CreateUserDTO;
 import com.willian.financial_organizer.dtos.UserResponseDTO;
 import com.willian.financial_organizer.exceptions.DuplicateResourceException;
 import com.willian.financial_organizer.exceptions.RequiredObjectIsNullException;
+import com.willian.financial_organizer.exceptions.ResourceNotFoundException;
 import com.willian.financial_organizer.model.User;
 import com.willian.financial_organizer.repositories.UserRepository;
 import com.willian.financial_organizer.services.interfaces.IUserServices;
@@ -40,6 +41,11 @@ public class UserServices implements IUserServices, UserDetailsService {
         User savedUser = repository.save(createDtoToUser(user));
 
         return userToResponseDto(savedUser);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this User ID"));
     }
 
     @Override

@@ -24,7 +24,7 @@ public class ReleasesDTO {
     private Integer year;
 
     @JsonProperty("user_id")
-    private User userId;
+    private Long userId;
 
     private BigDecimal value;
 
@@ -43,7 +43,7 @@ public class ReleasesDTO {
         this.description = releases.getDescription();
         this.month = releases.getMonth();
         this.year = releases.getYear();
-        this.userId = releases.getUserId();
+        this.userId = releases.getUserId().getId();
         this.value = releases.getValue();
         this.registrationDate = releases.getRegistrationDate();
         this.type = releases.getType();
@@ -82,11 +82,11 @@ public class ReleasesDTO {
         this.year = year;
     }
 
-    public User getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(User userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
