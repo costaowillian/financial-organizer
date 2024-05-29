@@ -38,7 +38,7 @@ public class UserServices implements IUserServices, UserDetailsService {
 
         user.setPassword(passwordEncoder(user.getPassword()));
 
-        User savedUser = repository.save(createDtoToUser(user));
+        User savedUser = repository.save(dtoToUser(user));
 
         return userToResponseDto(savedUser);
     }
@@ -74,8 +74,13 @@ public class UserServices implements IUserServices, UserDetailsService {
         return result;
     }
 
-    public User createDtoToUser(CreateUserDTO dto) {
-        return new User(dto.getName(), dto.getPassword(), dto.getEmail());
+    public User dtoToUser(CreateUserDTO dto) {
+        User user = new User();
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+        user.setPermissions(dto.getPermissions());
+        return  user;
     }
 
     public UserResponseDTO userToResponseDto(User user) {

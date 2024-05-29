@@ -1,6 +1,9 @@
 package com.willian.financial_organizer.dtos;
 
+import com.willian.financial_organizer.model.Permission;
 import com.willian.financial_organizer.model.User;
+
+import java.util.List;
 
 public class CreateUserDTO {
 
@@ -10,6 +13,8 @@ public class CreateUserDTO {
 
     private String password;
 
+    private List<Permission> permissions;
+
     public CreateUserDTO() {
     }
 
@@ -17,6 +22,7 @@ public class CreateUserDTO {
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
+        this.permissions = user.getPermissions();
     }
 
     public String getName() {
@@ -41,5 +47,13 @@ public class CreateUserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 }
