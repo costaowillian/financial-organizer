@@ -1,19 +1,39 @@
 package com.willian.financial_organizer.controllers;
 
 import com.willian.financial_organizer.controllers.interfaces.IAuthController;
+import com.willian.financial_organizer.dtos.CreateUserDTO;
+import com.willian.financial_organizer.dtos.UserResponseDTO;
 import com.willian.financial_organizer.dtos.security.AccountCredentialsDTO;
 import com.willian.financial_organizer.services.interfaces.IAuthServices;
+import com.willian.financial_organizer.services.interfaces.IUserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController implements IAuthController {
     @Autowired
     private IAuthServices authServices;
+
+    @Autowired
+    private IUserServices services;
+
+    @Override
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserResponseDTO> create(@RequestBody CreateUserDTO userDTO) {
+        UserResponseDTO user = services.createUser(userDTO);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+                .buildAndExpand(user.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(user);
+    }
 
     @Override
     @PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
