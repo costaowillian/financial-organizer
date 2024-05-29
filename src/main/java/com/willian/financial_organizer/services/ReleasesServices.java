@@ -98,13 +98,13 @@ public class ReleasesServices  implements IReleasesServices {
     @Override
     public BigDecimal getBalanceByUser(Long id) {
 
-        findRelease(id);
+        BigDecimal profit = BigDecimal.ZERO;
+        BigDecimal expenses = BigDecimal.ZERO;
 
-        BigDecimal profit = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.RECEITAS);
-        BigDecimal expenses = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.DESPESAS);
-
-        if(profit == null) profit = BigDecimal.ZERO;
-        if (expenses ==null) expenses = BigDecimal.ZERO;
+        if(findRelease(id) != null) {
+            profit = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.RECEITAS);
+            expenses = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.DESPESAS);
+        }
 
         return profit.subtract(expenses);
     }

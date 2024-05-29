@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @Repository
 public interface ReleasesRepository extends JpaRepository<Releases, Long> {
 
-    @Query(value = "select sum(l.value) form Releases r join r.userId u where u.id =: userId l.type =:type" +
-            "group by u")
-    BigDecimal getBalanceByTypeReleaseAndUser(@Param("userId") Long userId,@Param("type")  ReleasesTypes type);
+    @Query("select sum(r.value) from Releases r join r.userId u where u.id = :userId and r.type = :type group by u")
+    BigDecimal getBalanceByTypeReleaseAndUser(@Param("userId") Long userId, @Param("type") ReleasesTypes type);
 }
