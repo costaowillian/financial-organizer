@@ -22,8 +22,6 @@ public class CreateUserDTO {
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
-
-        setPermissions(user.getPermissions());
     }
 
     public String getName() {
@@ -54,9 +52,7 @@ public class CreateUserDTO {
         return permissions;
     }
 
-    public void setPermissions(List<Permission> permissions) {
-        for (Permission p: permissions) {
-            this.permissions.add(p.getId());
-        }
+    public void setPermissions(List<Long> permissions) {
+        this.permissions = permissions;
     }
 }

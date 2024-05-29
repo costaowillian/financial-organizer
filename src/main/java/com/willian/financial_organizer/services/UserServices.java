@@ -85,11 +85,12 @@ public class UserServices implements IUserServices, UserDetailsService {
 
         List<Permission> permissionList = new ArrayList<>();
 
-        dto.getPermissions().stream().map(x -> {
-            Permission p = permissionsRepository.findById(x).get();
-            permissionList.add(p);
-            return null;
-        });
+        for(Long id: dto.getPermissions()) {
+            Optional<Permission> p = Optional.ofNullable(permissionsRepository.findById(id).orElseThrow(
+                    () -> new ResourceNotFoundException("No Permissions found for this permission ID " + id +"!")));
+
+            permissionList.add(p.get());
+        }
 
         user.setPermissions(permissionList);
         return  user;

@@ -25,7 +25,7 @@ public class AuthController implements IAuthController {
     private IUserServices services;
 
     @Override
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value= "signup",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponseDTO> create(@RequestBody CreateUserDTO userDTO) {
         UserResponseDTO user = services.createUser(userDTO);
 
