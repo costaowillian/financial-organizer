@@ -5,7 +5,9 @@ import com.willian.financial_organizer.dtos.UserResponseDTO;
 import com.willian.financial_organizer.exceptions.DuplicateResourceException;
 import com.willian.financial_organizer.exceptions.RequiredObjectIsNullException;
 import com.willian.financial_organizer.exceptions.ResourceNotFoundException;
+import com.willian.financial_organizer.model.Permission;
 import com.willian.financial_organizer.model.User;
+import com.willian.financial_organizer.repositories.PermissionsRepository;
 import com.willian.financial_organizer.repositories.UserRepository;
 import com.willian.financial_organizer.services.interfaces.IUserServices;
 import jakarta.transaction.Transactional;
@@ -18,15 +20,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServices implements IUserServices, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private PermissionsRepository permissionsRepository;
 
     @Override
     @Transactional
@@ -79,7 +82,16 @@ public class UserServices implements IUserServices, UserDetailsService {
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
-        user.setPermissions(dto.getPermissions());
+
+        List<Permission> permissionList = new ArrayList<>();
+
+        dto.getPermissions().stream().map(x -> {
+            Permission p = permissionsRepository.findById(x).get();
+            permissionList.add(p);
+            return null;
+        });
+
+        user.setPermissions(permissionList);
         return  user;
     }
 

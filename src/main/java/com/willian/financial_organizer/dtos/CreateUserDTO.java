@@ -13,7 +13,7 @@ public class CreateUserDTO {
 
     private String password;
 
-    private List<Permission> permissions;
+    private List<Long> permissions;
 
     public CreateUserDTO() {
     }
@@ -22,7 +22,8 @@ public class CreateUserDTO {
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
-        this.permissions = user.getPermissions();
+
+        setPermissions(user.getPermissions());
     }
 
     public String getName() {
@@ -49,11 +50,13 @@ public class CreateUserDTO {
         this.password = password;
     }
 
-    public List<Permission> getPermissions() {
+    public List<Long> getPermissions() {
         return permissions;
     }
 
     public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
+        for (Permission p: permissions) {
+            this.permissions.add(p.getId());
+        }
     }
 }
