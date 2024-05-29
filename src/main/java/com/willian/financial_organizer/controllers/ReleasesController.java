@@ -4,6 +4,7 @@ import com.willian.financial_organizer.controllers.interfaces.IReleasesControlle
 import com.willian.financial_organizer.dtos.ReleasesDTO;
 import com.willian.financial_organizer.model.enums.ReleasesStatus;
 import com.willian.financial_organizer.services.ReleasesServices;
+import com.willian.financial_organizer.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +17,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1/releases")
 public class ReleasesController implements IReleasesController {
     @Autowired
     private ReleasesServices service;
+
+    private Logger logger = Logger.getLogger(UserServices.class.getName());
+
 
     @Override
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

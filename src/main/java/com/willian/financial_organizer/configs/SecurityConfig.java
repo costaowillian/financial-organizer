@@ -66,9 +66,8 @@ public class SecurityConfig {
                                         "/auth/signin",
                                         "/auth/refresh/**",
                                         "/swagger-ui/**",
-                                        "/v3/api-docs/**",
-                                        "/api/v1/user"
-                                ).permitAll()
+                                        "/v3/api-docs/**"
+                                ).permitAll().requestMatchers("/api/**").authenticated()
                 )
                 .cors(cors -> {})
                 .build();

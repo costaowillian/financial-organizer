@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +29,11 @@ public class User implements Serializable, UserDetails {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_permission", joinColumns = {@JoinColumn (name = "id_user")},
+            inverseJoinColumns = {@JoinColumn (name = "id_permission")})
+    private List<Permission> permissions;
 
     public User() {
     }
@@ -71,7 +77,13 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return this.permissions;
+    }
+
+    public List<String> getRoles() {
+        List<String> roles = new ArrayList<>();
+        permissions.forEach(p -> roles.add(p.getDescription()));
+        return roles;
     }
 
     public String getPassword() {
@@ -82,9 +94,16 @@ public class User implements Serializable, UserDetails {
     public String getUsername() {
         return email;
     }
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 
     @Override

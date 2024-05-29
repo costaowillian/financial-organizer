@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class JwtTokenProvider {
@@ -40,11 +41,11 @@ public class JwtTokenProvider {
         algorithm = Algorithm.HMAC256(secretKey.getBytes());
     }
 
-    public TokenDTO createAccessToken(String email) {
+    public TokenDTO createAccessToken(String email, List<String> roles) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
-        String accessToken = getAccessToken(email, now, validity);
-        String refreshToken = getRefreshToken(email, now);
+        String accessToken = getAccessToken(email, roles, now, validity);
+        String refreshToken = getRefreshToken(email, roles, now);
 
         return  new TokenDTO(email, true, now, validity, accessToken, refreshToken);
     }
@@ -55,21 +56,23 @@ public class JwtTokenProvider {
         JWTVerifier verifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = verifier.verify(refreshToken);
         String userName = decodedJWT.getSubject();
+        List<String> roles = decodedJWT.getClaim("role").asList(String.class
+        );
 
-        return createAccessToken(userName);
+        return createAccessToken(userName, roles);
     }
 
-    private String getRefreshToken(String email, Date now) {
+    private String getRefreshToken(String email, List<String> roles, Date now) {
         Date validityRefreshToken = new Date(now.getTime() + (validityInMilliseconds * 3));
 
-        return JWT.create().withIssuedAt(now).withExpiresAt(validityRefreshToken).withSubject(email)
+        return JWT.create().withClaim("roles", roles).withIssuedAt(now).withExpiresAt(validityRefreshToken).withSubject(email)
                 .sign(algorithm).strip();
     }
 
-    private String getAccessToken(String email, Date now, Date validity) {
+    private String getAccessToken(String email, List<String> roles, Date now, Date validity) {
         String issueUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
 
-        return JWT.create().withIssuedAt(now).withExpiresAt(validity).withSubject(email).withIssuer(issueUrl)
+        return JWT.create().withClaim("roles", roles).withIssuedAt(now).withExpiresAt(validity).withSubject(email).withIssuer(issueUrl)
                 .sign(algorithm).strip();
     }
 

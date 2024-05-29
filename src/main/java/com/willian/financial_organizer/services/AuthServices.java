@@ -43,24 +43,26 @@ public class AuthServices implements IAuthServices {
             TokenDTO tokenResponse;
 
             if(user.isPresent()) {
-                tokenResponse = tokenProvider.createAccessToken(email);
+                tokenResponse = tokenProvider.createAccessToken(email, user.get().getRoles());
             }else {
                 throw new UsernameNotFoundException("Invalid email/password supplied");
             }
 
             return ResponseEntity.ok(tokenResponse);
         } catch (Exception e) {
-            logger.info("messsage" + e.getMessage());
-            throw new BadCredentialsException("Invalid email/password supplieddddd");
+            logger.info("message" + e.getMessage());
+            throw new BadCredentialsException("Invalid email/password supplied");
         }
     }
 
     @Override
     public ResponseEntity refreshToken(String email, String refreshToken) {
-        Optional<User> user = repository.findByEmail(email);TokenDTO tokenResponse;
+        Optional<User> user = repository.findByEmail(email);
+
+        TokenDTO tokenResponse;
 
         if(user.isPresent()) {
-            tokenResponse = tokenProvider.createAccessToken(email);
+            tokenResponse = tokenProvider.createAccessToken(email, user.get().getRoles());
         }else {
             throw new UsernameNotFoundException("User not found! Please create your account!");
         }

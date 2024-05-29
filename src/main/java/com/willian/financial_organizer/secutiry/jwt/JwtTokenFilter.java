@@ -1,5 +1,6 @@
 package com.willian.financial_organizer.secutiry.jwt;
 
+import com.willian.financial_organizer.services.UserServices;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
