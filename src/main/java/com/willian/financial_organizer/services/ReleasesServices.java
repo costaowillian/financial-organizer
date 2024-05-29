@@ -53,8 +53,7 @@ public class ReleasesServices  implements IReleasesServices {
 
         isAllowed(releases);
 
-        Releases entity = repository.findById(releases.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        Releases entity = findRelease(releases.getId());
 
         entity = updateRelease(entity, releases);
 
@@ -64,8 +63,7 @@ public class ReleasesServices  implements IReleasesServices {
     @Override
     @Transactional
     public void delete(Long id) {
-        Releases entity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        Releases entity = findRelease(id);
 
         repository.delete(entity);
     }
@@ -80,10 +78,10 @@ public class ReleasesServices  implements IReleasesServices {
 
     @Override
     public ReleasesDTO findById(Long id) {
-         Releases releases = repository.findById(id)
+        Releases entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
-        return releaseToDTO(releases);
+        return releaseToDTO(entity);
     }
 
     @Override
@@ -91,14 +89,17 @@ public class ReleasesServices  implements IReleasesServices {
     public void updateStatus(Long id, ReleasesStatus status) {
         if(status == null) throw new RequiredObjectIsNullException("Status can't be null!");
 
-        Releases entity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        Releases entity = findRelease(id);
+
         entity.setStatus(status);
         repository.save(entity);
     }
 
     @Override
     public BigDecimal getBalanceByUser(Long id) {
+
+        findRelease(id);
+
         BigDecimal profit = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.RECEITAS);
         BigDecimal expenses = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.DESPESAS);
 
@@ -136,6 +137,12 @@ public class ReleasesServices  implements IReleasesServices {
         if(releases.getType() == null) {
             throw new RequiredObjectIsNullException("Please insert a type.");
         }
+    }
+
+    private Releases findRelease(Long id) {
+        Releases entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        return  entity;
     }
 
     private void validateUpdateRelease(ReleasesDTO releasesDTO) {
