@@ -50,7 +50,7 @@ public interface IReleasesController {
                     @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
             })
-    ResponseEntity<ReleasesDTO> update(ReleasesDTO releasesDTO);
+    ResponseEntity<ReleasesDTO> update(ReleasesDTO releasesDTO) throws Exception;
 
     @Operation(
             summary = "Delete Release",
@@ -107,7 +107,7 @@ public interface IReleasesController {
             description = "This endpoint Delete a Release!",
             tags = {"Releases"},
             responses = {
-                    @ApiResponse(description = "No Success", responseCode = "200", content = @Content),
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
