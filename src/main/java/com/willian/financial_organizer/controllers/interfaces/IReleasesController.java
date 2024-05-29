@@ -104,8 +104,8 @@ public interface IReleasesController {
     ResponseEntity<ReleasesDTO> findById(Long id);
 
     @Operation(
-            summary = "Delete Release",
-            description = "This endpoint Delete a Release!",
+            summary = "Update Status",
+            description = "This endpoint Update the release Status!",
             tags = {"Releases"},
             responses = {
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),

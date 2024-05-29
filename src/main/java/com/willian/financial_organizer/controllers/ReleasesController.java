@@ -17,6 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
+@RestController
+@RequestMapping("/api/v1/releases")
 public class ReleasesController implements IReleasesController {
     @Autowired
     private ReleasesServices service;
@@ -58,13 +60,13 @@ public class ReleasesController implements IReleasesController {
     }
 
     @Override
-    @GetMapping(name = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ReleasesDTO> findById(Long id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
     @Override
-    @PutMapping(name = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateStatus(@PathVariable(value = "id") Long id, @RequestBody ReleasesStatus status) {
         service.updateStatus(id, status);
