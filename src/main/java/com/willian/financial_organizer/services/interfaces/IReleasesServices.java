@@ -1,5 +1,6 @@
 package com.willian.financial_organizer.services.interfaces;
 
+import com.willian.financial_organizer.dtos.ReleasesDTO;
 import com.willian.financial_organizer.model.Releases;
 import com.willian.financial_organizer.model.enums.ReleasesStatus;
 
@@ -7,17 +8,17 @@ import java.util.List;
 
 public interface IReleasesServices {
 
-    Releases save(Releases releases);
+    ReleasesDTO save(ReleasesDTO releases);
 
-    Releases update(Releases releases);
+    ReleasesDTO update(ReleasesDTO releases) throws Exception;
 
     void delete(Long id);
 
-    List<Releases> findAll();
+    List<ReleasesDTO> findAll();
 
-    Releases findById(Long id);
+    ReleasesDTO findById(Long id);
 
     void updateStatus(Long id, ReleasesStatus status);
 
-    void validateReleases(Releases releases);
+    void validateReleases(ReleasesDTO releases);
 }

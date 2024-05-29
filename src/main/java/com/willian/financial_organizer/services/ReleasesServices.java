@@ -1,5 +1,6 @@
 package com.willian.financial_organizer.services;
 
+import com.willian.financial_organizer.dtos.ReleasesDTO;
 import com.willian.financial_organizer.exceptions.RequiredObjectIsNullException;
 import com.willian.financial_organizer.exceptions.ResourceNotFoundException;
 import com.willian.financial_organizer.model.Releases;
@@ -8,11 +9,13 @@ import com.willian.financial_organizer.repositories.ReleasesRepository;
 import com.willian.financial_organizer.services.interfaces.IReleasesServices;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ReleasesServices  implements IReleasesServices {
@@ -22,23 +25,29 @@ public class ReleasesServices  implements IReleasesServices {
 
     @Override
     @Transactional
-    public Releases save(Releases releases) {
+    public ReleasesDTO save(ReleasesDTO releases) {
         validateReleases(releases);
 
         releases.setStatus(ReleasesStatus.PENDENTE);
 
-        return repository.save(releases);
+        Releases release = dtoToRelease(releases);
+
+        return releaseToDTO(repository.save(release));
     }
 
     @Override
     @Transactional
-    public Releases update(Releases releases) {
-        validateReleases(releases);
+    public ReleasesDTO update(ReleasesDTO releases) throws Exception {
+        validateUpdateRelease(releases);
+
+        isAllowed(releases);
 
         Releases entity = repository.findById(releases.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
-        return repository.save(releases);
+        entity = updateRelease(entity, releases);
+
+        return releaseToDTO(repository.save(entity));
     }
 
     @Override
@@ -51,14 +60,19 @@ public class ReleasesServices  implements IReleasesServices {
     }
 
     @Override
-    public List<Releases> findAll() {
-        return repository.findAll();
+    public List<ReleasesDTO> findAll() {
+        List<Releases> releasesList = repository.findAll();
+
+        return releasesList.stream()
+                .map(x -> new ReleasesDTO(x)).toList();
     }
 
     @Override
-    public Releases findById(Long id) {
-        return repository.findById(id)
+    public ReleasesDTO findById(Long id) {
+         Releases releases = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+
+        return releaseToDTO(releases);
     }
 
     @Override
@@ -73,7 +87,7 @@ public class ReleasesServices  implements IReleasesServices {
     }
 
     @Override
-    public void validateReleases(Releases releases) {
+    public void validateReleases(ReleasesDTO releases) {
 
         if(releases == null) throw new RequiredObjectIsNullException();
 
@@ -100,5 +114,71 @@ public class ReleasesServices  implements IReleasesServices {
         if(releases.getType() == null) {
             throw new RequiredObjectIsNullException("Please insert a type.");
         }
+    }
+
+    private void validateUpdateRelease(ReleasesDTO releasesDTO) {
+        if(releasesDTO == null) throw new RequiredObjectIsNullException();
+
+        if(releasesDTO.getDescription() == null || releasesDTO.getDescription().trim().equals("")) {
+            throw  new RequiredObjectIsNullException("Description is invalid.");
+        }
+
+        if(releasesDTO.getMonth() == null || releasesDTO.getMonth() < 1 || releasesDTO.getMonth() < 12) {
+            throw new RequiredObjectIsNullException("Month is invalid.");
+        }
+
+        if(releasesDTO.getYear() == null || releasesDTO.getYear().toString().length() !=4) {
+            throw new RequiredObjectIsNullException("Year is invalid.");
+        }
+
+        if (releasesDTO.getValue() == null || releasesDTO.getValue().compareTo(BigDecimal.ZERO) < 1) {
+            throw new RequiredObjectIsNullException("Please insert a valid value.");
+        }
+
+        if(releasesDTO.getType() == null) {
+            throw new RequiredObjectIsNullException("Please insert a type.");
+        }
+    }
+
+    private Releases updateRelease(Releases entity, ReleasesDTO releasesDTO) {
+        entity.setDescription(releasesDTO.getDescription());
+        entity.setMonth(releasesDTO.getMonth());
+        entity.setValue(releasesDTO.getValue());
+        entity.setYear(releasesDTO.getYear());
+        entity.setType(releasesDTO.getType());
+        return entity;
+    }
+
+    private void isAllowed(ReleasesDTO releasesDTO) throws Exception {
+        Set<String> validFields = new HashSet<>();
+        validFields.add("description");
+        validFields.add("month");
+        validFields.add("value");
+        validFields.add("year");
+        validFields.add("type");
+
+        for (Field field : releasesDTO.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            if (field.get(releasesDTO) != null && !validFields.contains(field.getName())) {
+                throw new IllegalAccessException("This field is not allowed: " + field.getName());
+            }
+        }
+    }
+
+    private Releases dtoToRelease(ReleasesDTO releasesDTO) {
+        Releases releases = new Releases();
+        releases.setStatus(releasesDTO.getStatus());
+        releases.setDescription(releasesDTO.getDescription());
+        releases.setMonth(releasesDTO.getMonth());
+        releases.setValue(releasesDTO.getValue());
+        releases.setYear(releasesDTO.getYear());
+        releases.setRegistrationDate(releasesDTO.getRegistrationDate());
+        releases.setUserId(releasesDTO.getUserId());
+        releases.setType(releasesDTO.getType());
+        return releases;
+    }
+
+    private ReleasesDTO releaseToDTO(Releases releases) {
+        return  new ReleasesDTO(releases);
     }
 }
