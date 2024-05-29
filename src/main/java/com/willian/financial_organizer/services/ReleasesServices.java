@@ -5,6 +5,7 @@ import com.willian.financial_organizer.exceptions.RequiredObjectIsNullException;
 import com.willian.financial_organizer.exceptions.ResourceNotFoundException;
 import com.willian.financial_organizer.model.Releases;
 import com.willian.financial_organizer.model.enums.ReleasesStatus;
+import com.willian.financial_organizer.model.enums.ReleasesTypes;
 import com.willian.financial_organizer.repositories.ReleasesRepository;
 import com.willian.financial_organizer.services.interfaces.IReleasesServices;
 import jakarta.transaction.Transactional;
@@ -94,6 +95,17 @@ public class ReleasesServices  implements IReleasesServices {
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
         entity.setStatus(status);
         repository.save(entity);
+    }
+
+    @Override
+    public BigDecimal getBalanceByUser(Long id) {
+        BigDecimal profit = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.RECEITAS);
+        BigDecimal expenses = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.DESPESAS);
+
+        if(profit == null) profit = BigDecimal.ZERO;
+        if (expenses ==null) expenses = BigDecimal.ZERO;
+
+        return profit.subtract(expenses);
     }
 
     @Override
