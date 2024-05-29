@@ -9,12 +9,16 @@ import com.willian.financial_organizer.repositories.ReleasesRepository;
 import com.willian.financial_organizer.services.interfaces.IReleasesServices;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -22,6 +26,9 @@ public class ReleasesServices  implements IReleasesServices {
 
     @Autowired
     private ReleasesRepository repository;
+
+    @Autowired
+    private PagedResourcesAssembler<ReleasesDTO> assembler;
 
     @Override
     @Transactional
@@ -60,11 +67,11 @@ public class ReleasesServices  implements IReleasesServices {
     }
 
     @Override
-    public List<ReleasesDTO> findAll() {
-        List<Releases> releasesList = repository.findAll();
+    public PagedModel<EntityModel<ReleasesDTO>> findAll(Pageable pageable) {
+        Page<Releases> releasesPage = repository.findAll(pageable);
+        Page<ReleasesDTO> releasesDTOPage = releasesPage.map(x -> new ReleasesDTO(x));
 
-        return releasesList.stream()
-                .map(x -> new ReleasesDTO(x)).toList();
+        return assembler.toModel(releasesDTOPage);
     }
 
     @Override

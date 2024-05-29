@@ -8,10 +8,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 
 @Tag(name="Releases", description = "Endpoints for Managing Releases")
 public interface IReleasesController {
@@ -82,7 +83,7 @@ public interface IReleasesController {
                     @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
             })
-    ResponseEntity<List<ReleasesDTO>> findAll();
+    ResponseEntity<PagedModel<EntityModel<ReleasesDTO>>> findAll(Integer page, Integer size, String direction);
 
     @Operation(
             summary = "Find a Release by id",

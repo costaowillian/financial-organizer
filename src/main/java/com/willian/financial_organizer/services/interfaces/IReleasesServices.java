@@ -3,6 +3,9 @@ package com.willian.financial_organizer.services.interfaces;
 import com.willian.financial_organizer.dtos.ReleasesDTO;
 import com.willian.financial_organizer.model.Releases;
 import com.willian.financial_organizer.model.enums.ReleasesStatus;
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 
 import java.util.List;
 
@@ -14,7 +17,7 @@ public interface IReleasesServices {
 
     void delete(Long id);
 
-    List<ReleasesDTO> findAll();
+    PagedModel<EntityModel<ReleasesDTO>> findAll(Pageable pageable);
 
     ReleasesDTO findById(Long id);
 
