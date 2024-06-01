@@ -49,7 +49,8 @@ public class Releases {
     public Releases() {
     }
 
-    public Releases(Long id, String description, Integer month, Integer year, User userId, BigDecimal value, LocalDate registrationDate, ReleasesTypes type, ReleasesStatus status) {
+    public Releases(Long id, String description, Integer month,
+                    Integer year, User userId, BigDecimal value, LocalDate registrationDate, ReleasesTypes type, ReleasesStatus status) {
         this.id = id;
         this.description = description;
         this.month = month;
@@ -59,6 +60,17 @@ public class Releases {
         this.registrationDate = registrationDate;
         this.type = type;
         this.status = status;
+    }
+
+    public Releases(Long id, String description, Integer month,
+                    Integer year, User userId, BigDecimal value, LocalDate registrationDate, ReleasesTypes type) {
+        this.description = description;
+        this.month = month;
+        this.year = year;
+        this.userId = userId;
+        this.value = value;
+        this.registrationDate = registrationDate;
+        this.type = type;
     }
 
     public Long getId() {

@@ -122,7 +122,7 @@ public class ReleasesServices  implements IReleasesServices {
             throw  new RequiredObjectIsNullException("Description is invalid.");
         }
 
-        if(releases.getMonth() == null || releases.getMonth() < 1 || releases.getMonth() < 12) {
+        if(releases.getMonth() == null || releases.getMonth() < 1 || releases.getMonth() > 12) {
             throw new RequiredObjectIsNullException("Month is invalid.");
         }
 
@@ -152,7 +152,7 @@ public class ReleasesServices  implements IReleasesServices {
             throw  new RequiredObjectIsNullException("Description is invalid.");
         }
 
-        if(releasesDTO.getMonth() == null || releasesDTO.getMonth() < 1 || releasesDTO.getMonth() < 12) {
+        if(releasesDTO.getMonth() == null || releasesDTO.getMonth() < 1 || releasesDTO.getMonth() > 12) {
             throw new RequiredObjectIsNullException("Month is invalid.");
         }
 
@@ -202,7 +202,7 @@ public class ReleasesServices  implements IReleasesServices {
         releases.setValue(releasesDTO.getValue());
         releases.setYear(releasesDTO.getYear());
         releases.setRegistrationDate(releasesDTO.getRegistrationDate());
-        releases.setUserId(userService.findById(releasesDTO.getId()));
+        releases.setUserId(userService.findById(releasesDTO.getUserId()));
         releases.setType(releasesDTO.getType());
         return releases;
     }

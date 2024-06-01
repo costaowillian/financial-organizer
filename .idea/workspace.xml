@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ace83b03-3a5d-410c-97f5-471f7cb58e6b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/src/test/java/com/willian/financial_organizer/services/ReleasesServicesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/server/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/server/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/FinancialOrganizerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/FinancialOrganizerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/configs/OpenApiConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/configs/OpenApiConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/configs/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/configs/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/configs/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/controllers/ReleasesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/controllers/ReleasesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/controllers/interfaces/IAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/controllers/interfaces/IAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/controllers/interfaces/IReleasesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/controllers/interfaces/IReleasesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/controllers/interfaces/IUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/controllers/interfaces/IUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/dtos/CreateUserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/dtos/CreateUserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/dtos/ReleasesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/dtos/ReleasesDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/dtos/UserResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/dtos/UserResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/dtos/security/AccountCredentialsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/dtos/security/AccountCredentialsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/dtos/security/TokenDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/dtos/security/TokenDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/exceptions/DuplicateResourceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/exceptions/DuplicateResourceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/exceptions/ExceptionResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/exceptions/ExceptionResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/exceptions/InvalidJwtAuthenticationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/exceptions/InvalidJwtAuthenticationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/exceptions/RequiredObjectIsNullException.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/exceptions/RequiredObjectIsNullException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/exceptions/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/exceptions/ResourceNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/exceptions/handler/CustomizedResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/exceptions/handler/CustomizedResponseEntityExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/model/Permission.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/model/Permission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/model/Releases.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/model/Releases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/model/enums/ReleasesStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/model/enums/ReleasesStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/model/enums/ReleasesTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/model/enums/ReleasesTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/repositories/PermissionsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/repositories/PermissionsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/repositories/ReleasesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/repositories/ReleasesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/secutiry/jwt/JwtConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/secutiry/jwt/JwtConfigurer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/secutiry/jwt/JwtTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/secutiry/jwt/JwtTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/secutiry/jwt/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/secutiry/jwt/JwtTokenProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/services/AuthServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/services/AuthServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/services/ReleasesServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/services/ReleasesServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/services/UserServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/services/UserServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/services/interfaces/IAuthServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/services/interfaces/IAuthServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/services/interfaces/IReleasesServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/services/interfaces/IReleasesServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/services/interfaces/IUserServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/willian/financial_organizer/services/interfaces/IUserServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/willian/financial_organizer/FinancialOrganizerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/com/willian/financial_organizer/FinancialOrganizerApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/willian/financial_organizer/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/com/willian/financial_organizer/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/willian/financial_organizer/repositories/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/com/willian/financial_organizer/repositories/UserRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/willian/financial_organizer/services/UserServicesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/com/willian/financial_organizer/services/UserServicesTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/willian/financial_organizer/services/UserServices.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2h3IZISoJVeeULzRDd8GuHpMGTY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FinancialOrganizerApplication.executor": "Run",
+    "JUnit.FinancialOrganizerApplicationTests.executor": "Run",
+    "JUnit.ReleasesServicesTest.executor": "Run",
+    "JUnit.ReleasesServicesTest.testCreate_GivenEmptyReleaseObject_WhenCrete_ShouldThrowException.executor": "Debug",
+    "JUnit.ReleasesServicesTest.testCreate_GivenReleaseObject_WhenCrete_ShouldReturnAReleaseObject.executor": "Run",
+    "JUnit.UserRepositoryTest.executor": "Run",
+    "JUnit.UserServicesTest.executor": "Run",
+    "JUnit.UserServicesTest.testGivenANoExistentEmail_WhenEmailIsValid.executor": "Run",
+    "JUnit.UserServicesTest.testGivenAnExistentEmail_WhenEmailIsValid_ShouldThrowException.executor": "Run",
+    "JUnit.UserServicesTest.testGivenAnyString_WhenPasswordEncoder_ShouldReturnPasswordEncoded.executor": "Run",
+    "JUnit.UserServicesTest.testGivenEmptyUser_WhenCrete_ShouldThrowException.executor": "Run",
+    "JUnit.UserServicesTest.testGivenUser_WhenCrete_ShouldReturnAUserObject.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TestNG.ReleasesServicesTest.testCreateGivenReleaseObject_WhenCrete_ShouldReturnAReleaseObject.executor": "Run",
+    "TestNG.ReleasesServicesTest.testCreate_GivenReleaseObject_WhenCrete_ShouldReturnAReleaseObject.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/willian.costa/Documents/Spring/financial_organizer/src/test/java/com/willian/financial_organizer"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.willian.financial_organizer.exceptions" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\willian.costa\Documents\Spring\financial_organizer\src\test\java\com\willian\financial_organizer" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.willian.financial_organizer.dtos" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.ReleasesServicesTest">
+    <configuration name="FinancialOrganizerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.willian.financial_organizer.FinancialOrganizerApplication" />
+      <module name="financial_organizer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.willian.financial_organizer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FinancialOrganizerApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="financial_organizer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.willian.financial_organizer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.willian.financial_organizer" />
+      <option name="MAIN_CLASS_NAME" value="com.willian.financial_organizer.FinancialOrganizerApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReleasesServicesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="financial_organizer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.willian.financial_organizer.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.willian.financial_organizer.services" />
+      <option name="MAIN_CLASS_NAME" value="com.willian.financial_organizer.services.ReleasesServicesTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReleasesServicesTest.testCreate_GivenReleaseObject_WhenCrete_ShouldReturnAReleaseObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="financial_organizer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.willian.financial_organizer.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.willian.financial_organizer.services" />
+      <option name="MAIN_CLASS_NAME" value="com.willian.financial_organizer.services.ReleasesServicesTest" />
+      <option name="METHOD_NAME" value="testCreate_GivenReleaseObject_WhenCrete_ShouldReturnAReleaseObject" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServicesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="financial_organizer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.willian.financial_organizer.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.willian.financial_organizer.services" />
+      <option name="MAIN_CLASS_NAME" value="com.willian.financial_organizer.services.UserServicesTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ReleasesServicesTest" />
+        <item itemvalue="JUnit.ReleasesServicesTest.testCreate_GivenReleaseObject_WhenCrete_ShouldReturnAReleaseObject" />
+        <item itemvalue="Application.FinancialOrganizerApplication" />
+        <item itemvalue="JUnit.FinancialOrganizerApplicationTests" />
+        <item itemvalue="JUnit.UserServicesTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ace83b03-3a5d-410c-97f5-471f7cb58e6b" name="Changes" comment="" />
+      <created>1716816390308</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716816390308</updated>
+    </task>
+    <servers />
+  </component>
+</project>
