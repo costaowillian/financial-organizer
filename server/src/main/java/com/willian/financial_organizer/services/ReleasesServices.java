@@ -87,7 +87,7 @@ public class ReleasesServices  implements IReleasesServices {
     @Override
     @Transactional
     public void updateStatus(Long id, ReleasesStatus status) {
-        if(status == null) throw new RequiredObjectIsNullException("Status can't be null!");
+        if(status == null) throw new IllegalArgumentException("Status can't be null!");
 
         Releases entity = findRelease(id);
 
