@@ -114,28 +114,52 @@ public class ReleasesServices  implements IReleasesServices {
 
         if(releases == null) throw new RequiredObjectIsNullException();
 
-        if(releases.getUserId() == null) {
-            throw new RequiredObjectIsNullException("User ID is required!");
-        }
+        idIsValid(releases);
 
-        if(releases.getDescription() == null || releases.getDescription().trim().equals("")) {
-            throw  new RequiredObjectIsNullException("Description is invalid.");
-        }
+        descriptionIsValid(releases);
 
-        if(releases.getMonth() == null || releases.getMonth() < 1 || releases.getMonth() > 12) {
-            throw new RequiredObjectIsNullException("Month is invalid.");
-        }
+        monthIsValid(releases);
 
-        if(releases.getYear() == null || releases.getYear().toString().length() !=4) {
-            throw new RequiredObjectIsNullException("Year is invalid.");
-        }
+        yearISValid(releases);
 
+        valueIsValid(releases);
+
+        typeIsValid(releases);
+    }
+
+    private static void typeIsValid(ReleasesDTO releases) {
+        if(releases.getType() == null) {
+            throw new RequiredObjectIsNullException("Please insert a type.");
+        }
+    }
+
+    private static void valueIsValid(ReleasesDTO releases) {
         if (releases.getValue() == null || releases.getValue().compareTo(BigDecimal.ZERO) < 1) {
             throw new RequiredObjectIsNullException("Please insert a valid value.");
         }
+    }
 
-        if(releases.getType() == null) {
-            throw new RequiredObjectIsNullException("Please insert a type.");
+    private static void yearISValid(ReleasesDTO releases) {
+        if(releases.getYear() == null || releases.getYear().toString().length() !=4) {
+            throw new RequiredObjectIsNullException("Year is invalid.");
+        }
+    }
+
+    private static void monthIsValid(ReleasesDTO releases) {
+        if(releases.getMonth() == null || releases.getMonth() < 1 || releases.getMonth() > 12) {
+            throw new RequiredObjectIsNullException("Month is invalid.");
+        }
+    }
+
+    private static void descriptionIsValid(ReleasesDTO releases) {
+        if(releases.getDescription() == null || releases.getDescription().trim().equals("")) {
+            throw  new RequiredObjectIsNullException("Description is invalid.");
+        }
+    }
+
+    private static void idIsValid(ReleasesDTO releases) {
+        if(releases.getUserId() == null) {
+            throw new RequiredObjectIsNullException("User ID is required!");
         }
     }
 
@@ -148,25 +172,15 @@ public class ReleasesServices  implements IReleasesServices {
     private void validateUpdateRelease(ReleasesDTO releasesDTO) {
         if(releasesDTO == null) throw new RequiredObjectIsNullException();
 
-        if(releasesDTO.getDescription() == null || releasesDTO.getDescription().trim().equals("")) {
-            throw  new RequiredObjectIsNullException("Description is invalid.");
-        }
+        descriptionIsValid(releasesDTO);
 
-        if(releasesDTO.getMonth() == null || releasesDTO.getMonth() < 1 || releasesDTO.getMonth() > 12) {
-            throw new RequiredObjectIsNullException("Month is invalid.");
-        }
+        monthIsValid(releasesDTO);
 
-        if(releasesDTO.getYear() == null || releasesDTO.getYear().toString().length() !=4) {
-            throw new RequiredObjectIsNullException("Year is invalid.");
-        }
+        yearISValid(releasesDTO);
 
-        if (releasesDTO.getValue() == null || releasesDTO.getValue().compareTo(BigDecimal.ZERO) < 1) {
-            throw new RequiredObjectIsNullException("Please insert a valid value.");
-        }
+        valueIsValid(releasesDTO);
 
-        if(releasesDTO.getType() == null) {
-            throw new RequiredObjectIsNullException("Please insert a type.");
-        }
+        typeIsValid(releasesDTO);
     }
 
     private Releases updateRelease(Releases entity, ReleasesDTO releasesDTO) {
