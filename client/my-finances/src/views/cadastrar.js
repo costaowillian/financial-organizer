@@ -27,7 +27,7 @@ const Cadastrar = () => {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="bs-component">
-                                    <form onSubmit={() => enviar()}>
+                                    <form onSubmit={enviar}>
                                         <fieldset>
                                             <FormGroup label="Nome: *" htmlFor="nome" >
                                                 <input type="text"

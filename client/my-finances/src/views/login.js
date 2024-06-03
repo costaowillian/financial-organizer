@@ -26,7 +26,7 @@ const Login = () => {
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="bs-component">
-                                        <form onSubmit={() => entrar()}>
+                                        <form onSubmit={entrar}>
                                             <fieldset>
                                                 <FormGroup label="Email: *" htmlFor="email" >
                                                     <input type="email"
