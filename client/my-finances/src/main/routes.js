@@ -4,6 +4,7 @@ import NavBar from "../components/navbar";
 
 const Login = lazy(() => import('../views/login'));
 const Cadastrar = lazy(() => import('../views/cadastrar'));
+const Home = lazy(() => import('../views/home'));
 
 function Router() {
     return (
@@ -11,6 +12,7 @@ function Router() {
             <NavBar />
             <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
+                    <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/cadastrar" element={<Cadastrar />} />
                 </Routes>
