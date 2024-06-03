@@ -1,20 +1,32 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import Card from '../components/card';
 import FormGroup from "../components/form-group";
 
 import { useNavigate } from "react-router-dom";
+import api from '../services/api';
 
 const Login = () => {
 
     const navigate = useNavigate([]);
 
-    const [email, setEmail] = useState();
-    const [senha, setSenha] = useState();
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
 
-    const entrar = (event) => {
+    const entrar = async (event) => {
         event.preventDefault();
-        console.log("email: " + email);
-        console.log("senha: " + senha);
+        let data = JSON.stringify({
+            "email": email,
+            "password": senha
+        });
+        
+        try {
+            const response = await api.post('/auth/signin', data);
+            localStorage.setItem('accessToken', response.data.accessToken);
+            navigate('/');
+        } catch (err) {
+            console.log(err);
+            alert("Falha ao entrar. Por Favor tente novamente!")
+        }
     }
 
     return (
@@ -32,7 +44,7 @@ const Login = () => {
                                                     <input type="email"
                                                         value={email}
                                                         onChange={e => setEmail(e.target.value)}
-                                                        className="form-control" id="email" aria-describedby="emailHelp"
+                                                        className="form-control" id="email"
                                                         placeholder="Digite o Email" />
                                                 </FormGroup>
                                                 <FormGroup label="Senha: *" htmlFor="senha" >
