@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
+@ActiveProfiles("test")
 public class UserRepositoryTest {
 
     @Autowired
@@ -76,6 +78,6 @@ public class UserRepositoryTest {
         Optional<User> result = repository.findByEmail("willia22@gmail.vom");
 
         //Then /Assert
-        assertNull(result, () -> "Should return null");
+        assertFalse(result.isPresent(), () -> "Should return null");
     }
 }

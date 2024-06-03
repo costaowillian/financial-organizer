@@ -8,7 +8,7 @@ spring:
     name:  financial_organizer
 
   profiles:
-    active: test
+    active: dev
 
   jpa:
     open-in-view: false

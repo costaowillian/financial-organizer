@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "usuario", schema = "financas")
+@Table(name = "usuario")
 public class User implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
