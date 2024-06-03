@@ -1,6 +1,7 @@
 package com.willian.financial_organizer.controllers;
 
 
+import com.willian.financial_organizer.controllers.interfaces.IUserController;
 import com.willian.financial_organizer.services.ReleasesServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/v1/user")
-public class UserController {
+public class UserController  implements IUserController {
 
     @Autowired
     private ReleasesServices releasesServices;
