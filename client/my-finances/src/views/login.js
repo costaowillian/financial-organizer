@@ -28,9 +28,11 @@ const Login = () => {
         } catch (e) {   
             if (e.response && e.response.data && e.response.data.message === 'Invalid email/password supplied') {
                 setErrorMessage("Email ou senha inválidos, por favor tente novamente");
-            } else {
+            }
+            
+            if(e.status == 403 || e.status == 500) {
                 setErrorMessage("Falha ao entrar, por favor tente novamente!");
-            }        
+            }
         } 
     }
 
