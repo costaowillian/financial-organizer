@@ -1,10 +1,28 @@
 package com.willian.financial_organizer.configs;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.logging.Logger;
+
+@Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+    @Value("${cors.originPatterns:default}")
+    private String corsOriginPatterns = "";
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        var allowedOrigins = corsOriginPatterns.split(",");
+        registry.addMapping("/**")
+                .allowedMethods("*")
+                .allowedOrigins(allowedOrigins)
+                .allowCredentials(true);
+    }
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
