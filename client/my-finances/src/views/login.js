@@ -23,7 +23,7 @@ const Login = () => {
         
         try {
             const response = await api.post('/auth/signin', data);
-            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem('user_data', JSON.stringify(response.data));
             navigate('/');
         } catch (e) {   
             if (e.response && e.response.data && e.response.data.message === 'Invalid email/password supplied') {

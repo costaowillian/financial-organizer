@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../services/api';
 
 const Home = () => {
 
     const [saldo, setSaldo] = useState(0.00);
 
+    const userData = JSON.parse(localStorage.getItem('user_data'));
+
+    const fetchSaldo = async () => {
+        try {
+            const result = await api.get(`/api/v1/user/${userData.userId}/balance`, {
+                headers: {
+                    'authorization': `Bearer ${userData.accessToken}`
+                }, 
+            })
+    
+            console.log(result.response.data.balance);
+        } catch (e) {
+            if(e.status == 404 || e.status == 500) {
+                setSaldo(0.00);
+            }
+        }
+    }
+
+    useEffect(() => {
+        fetchSaldo() ;
+    }, []);
+
     return (
         <>
             <div className="jumbotron">
                 <h1 className="display-3">Bem vindo!</h1>
-                <p className="lead">Seu saldo para o mês atual é de
+                <p className="lead">Seu saldo para o mês atual é de&nbsp;
                     <strong>
                         {Intl.NumberFormat('pt-br', { style: 'currency', currency: 'brl' }).format(saldo)}
                     </strong>
