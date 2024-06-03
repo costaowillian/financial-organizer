@@ -36,6 +36,9 @@ public class AuthServices implements IAuthServices {
         try {
             String email = data.getEmail();
             String password = data.getPassword();
+
+            validParams(email,password);
+
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email,password));
 
             Optional<User> user = repository.findByEmail(email);
@@ -68,5 +71,15 @@ public class AuthServices implements IAuthServices {
         }
 
         return ResponseEntity.ok(tokenResponse);
+    }
+
+    private void validParams(String email, String password) {
+        if(email == null || email.isBlank() || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email can't be null");
+        }
+
+        if(password ==null || password.isBlank() || password.trim().isEmpty()) {
+            throw new IllegalArgumentException("Password can't be null");
+        }
     }
 }
