@@ -12,6 +12,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const entrar = async (event) => {
         event.preventDefault();
         let data = JSON.stringify({
@@ -23,10 +25,13 @@ const Login = () => {
             const response = await api.post('/auth/signin', data);
             localStorage.setItem('accessToken', response.data.accessToken);
             navigate('/');
-        } catch (err) {
-            console.log(err);
-            alert("Falha ao entrar. Por Favor tente novamente!")
-        }
+        } catch (e) {   
+            if (e.response && e.response.data && e.response.data.message === 'Invalid email/password supplied') {
+                setErrorMessage("Email ou senha inválidos, por favor tente novamente");
+            } else {
+                setErrorMessage("Falha ao entrar, por favor tente novamente!");
+            }        
+        } 
     }
 
     return (
@@ -54,6 +59,11 @@ const Login = () => {
                                                         className="form-control" id="senha"
                                                         placeholder="Password" />
                                                 </FormGroup>
+
+                                                <span style={{color: "#dc3545"}}>
+                                                    {errorMessage ? errorMessage: ''}
+                                                    <br/>
+                                                </span>
                                                 <button type="submit" style={{ marginRight: '15px' }}
                                                     className="btn btn-success">Entrar</button>
                                                 <button type="button"
