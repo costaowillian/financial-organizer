@@ -12,14 +12,14 @@ const api = axios.create (
 )
 
 api.interceptors.request.use(
-    async config => {
-      const userData = await JSON.parse(localStorage.getItem('user_data'));
-      if (userData != null) {
-        config.headers.Authorization = `Bearer ${userData.accessToken}`;
-      }
-      return config;
-    },
-    error => Promise.reject(error)
+  async config => {
+    const userData = await JSON.parse(localStorage.getItem('user_data'));
+    if (userData && userData.accessToken) {
+      config.headers.Authorization = `Bearer ${userData.accessToken}`;
+    }
+    return config;
+  },
+  error => Promise.reject(error)
 );
 
 export default api;
