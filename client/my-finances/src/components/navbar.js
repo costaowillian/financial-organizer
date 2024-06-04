@@ -14,10 +14,10 @@ const NavBar = () => {
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/login">Home</Link>
+                                <Link className="nav-link" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/cadastrar">Lançamentos</Link>
+                                <Link className="nav-link" to="/lancamentos">Lançamentos</Link>
                             </li>
                         </ul>
                     </div>
