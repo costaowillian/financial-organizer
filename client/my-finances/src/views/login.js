@@ -3,6 +3,7 @@ import Card from '../components/card';
 import FormGroup from "../components/form-group";
 import authService from "../services/authServices";
 
+import { mensagemError } from '../components/toastr';
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -11,8 +12,6 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-
-    const [errorMessage, setErrorMessage] = useState('');
 
     const entrar = async (event) => {
         event.preventDefault();
@@ -28,11 +27,11 @@ const Login = () => {
             }
         } catch (e) {   
             if (e.response && e.response.data && e.response.data.message === 'Invalid email/password supplied') {
-                setErrorMessage("Email ou senha inválidos, por favor tente novamente");
+                mensagemError("Email ou senha inválidos, por favor tente novamente");
             }
             
             if(e.status == 403 || e.status == 500) {
-                setErrorMessage("Falha ao entrar, por favor tente novamente!");
+                mensagemError("Falha ao entrar, por favor tente novamente!");
             }
         } 
     }
@@ -62,11 +61,6 @@ const Login = () => {
                                                         className="form-control" id="senha"
                                                         placeholder="Password" />
                                                 </FormGroup>
-
-                                                <span style={{color: "#dc3545"}}>
-                                                    {errorMessage ? errorMessage: ''}
-                                                    <br/>
-                                                </span>
                                                 <button type="submit" style={{ marginRight: '15px' }}
                                                     className="btn btn-success">Entrar</button>
                                                 <button type="button"
