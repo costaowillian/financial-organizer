@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
+import userService from '../services/userSerivces';
 
 const Home = () => {
 
@@ -10,11 +11,8 @@ const Home = () => {
 
     const fetchSaldo = async () => {
         try {
-            const result = await api.get(`/api/v1/user/${userData.userId}/balance`, {
-                headers: {
-                    'authorization': `Bearer ${userData.accessToken}`
-                }, 
-            })
+            const result = await userService.get(`/api/v1/user/${userData.userId}/balance`);
+            setSaldo(result.data);
         } catch (e) {
             if(e.status == 404 || e.status == 500) {
                 setSaldo(0.00);
