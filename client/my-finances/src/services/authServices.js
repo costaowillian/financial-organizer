@@ -14,8 +14,8 @@ const authService = {
     },
 
     logout: () => {
-        localStorage.removeItem('token');
-        if(localStorage.getItem(user_data) == null) {
+        localStorage.removeItem('user_data');
+        if(localStorage.getItem('user_data') == null) {
             return true;
         } else {
             return false;

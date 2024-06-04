@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Card from '../components/card';
 import FormGroup from "../components/form-group";
+import authService from "../services/authServices";
 
 import { useNavigate } from "react-router-dom";
-import api from '../services/api';
 
 const Login = () => {
 

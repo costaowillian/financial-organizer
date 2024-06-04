@@ -12,10 +12,10 @@ const api = axios.create (
 )
 
 api.interceptors.request.use(
-    config => {
-      const userData = localStorage.getItem('user_data');
-      if (token) {
-        config.headers.Authorization = `Bearer ${userData.accesToken}`;
+    async config => {
+      const userData = await JSON.parse(localStorage.getItem('user_data'));
+      if (userData != null) {
+        config.headers.Authorization = `Bearer ${userData.accessToken}`;
       }
       return config;
     },
