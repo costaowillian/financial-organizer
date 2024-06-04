@@ -15,8 +15,6 @@ const Home = () => {
                     'authorization': `Bearer ${userData.accessToken}`
                 }, 
             })
-    
-            console.log(result.response.data.balance);
         } catch (e) {
             if(e.status == 404 || e.status == 500) {
                 setSaldo(0.00);
@@ -32,7 +30,7 @@ const Home = () => {
         <>
             <div className="jumbotron">
                 <h1 className="display-3">Bem vindo!</h1>
-                <p className="lead">Seu saldo para o mês atual é de&nbsp;
+                <p className="lead">Seu saldo para o mês atual é de {" "}
                     <strong>
                         {Intl.NumberFormat('pt-br', { style: 'currency', currency: 'brl' }).format(saldo)}
                     </strong>

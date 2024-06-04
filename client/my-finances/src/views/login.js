@@ -16,15 +16,16 @@ const Login = () => {
 
     const entrar = async (event) => {
         event.preventDefault();
-        let data = JSON.stringify({
+        let credentials = JSON.stringify({
             "email": email,
             "password": senha
         });
         
         try {
-            const response = await api.post('/auth/signin', data);
-            localStorage.setItem('user_data', JSON.stringify(response.data));
-            navigate('/');
+            const response = await authService.login(credentials);
+            if(response) {
+                navigate("/");
+            }
         } catch (e) {   
             if (e.response && e.response.data && e.response.data.message === 'Invalid email/password supplied') {
                 setErrorMessage("Email ou senha inválidos, por favor tente novamente");
