@@ -1,41 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 import LancamentoTable from './lancamentoTable';
+import lancamentoService from '../../services/lancamentoServices';
 
 const Lancamentos = () => {
 
-    const dadosDaTabela = [
-        {
-            id: 1,
-            descricao: 'Salário',
-            valor: 'R$ 4.200,00',
-            tipo: 'Receita',
-            data: '01/02/2019',
-            situacao: 'Pendente'
-        },
-        {
-            id: 2,
-            descricao: 'Salário',
-            valor: 'R$ 4.200,00',
-            tipo: 'Despesas',
-            data: '01/02/2019',
-            situacao: 'Pendente'
-        },
-        {
-            id: 3,
-            descricao: 'Salário',
-            valor: 'R$ 4.200,00',
-            tipo: 'Receita',
-            data: '01/02/2019',
-            situacao: 'Pendente'
-        },
-    ];
-
-
     const [searchText, setSearchText] = useState('');
 
-    const filteredData = dadosDaTabela.filter(item => item.tipo.toLowerCase().includes(searchText.toLowerCase()));
+    const [dadosDaTabela, setDadosDaTabela] = useState([]);
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+    const fetchData = async () => {
+        const response = await lancamentoService.get("api/v1/releases?page=0&size=50&direction=asc");
+        if (response) {
+            setDadosDaTabela(response.data._embedded.releasesDTOList);
+        }
+    }
+
+    const filteredData = dadosDaTabela.filter(item => item.status.toLowerCase().includes(searchText.toLowerCase()));
 
     return (
         <>
@@ -46,7 +31,7 @@ const Lancamentos = () => {
                             type="text"
                             id='search'
                             className="form-control"
-                            placeholder="Pesquisar por tipo..."
+                            placeholder="Pesquisar por situação..."
                             value={searchText}
                             onChange={e => setSearchText(e.target.value)}
                         />
@@ -60,7 +45,8 @@ const Lancamentos = () => {
                     </div>
 
                     <div className="bs-component">
-                        <LancamentoTable  data={filteredData} />
+                        {filteredData.length > 0? <LancamentoTable data={filteredData} /> : <p>Não há lançamentos para serem exibidos!</p>}
+                        
                     </div>
                 </div>
             </div>
