@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LancamentoTable = ({data}) => {
+
+    const navigate = useNavigate();
 
     return (
         <>
@@ -24,8 +27,8 @@ const LancamentoTable = ({data}) => {
                             <td>{item.data}</td>
                             <td>{item.situacao}</td>
                             <td>
-                                <button className="btn btn-primary">Editar</button>
-                                <button className="btn btn-danger">Deletar</button>
+                                <Link className="btn btn-primary" to='/'>Editar</Link>
+                                <Link className="btn btn-danger" to='/'>Deletar</Link>
                             </td>
                         </tr>
                     ))}
