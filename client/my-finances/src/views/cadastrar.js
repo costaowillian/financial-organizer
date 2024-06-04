@@ -3,6 +3,8 @@ import Card from "../components/card";
 import FormGroup from "../components/form-group";
 
 import { useNavigate } from "react-router-dom";
+import authService from "../services/authServices";
+import { mensagemError } from "../components/toastr";
 
 const Cadastrar = () => {
 
@@ -13,9 +15,60 @@ const Cadastrar = () => {
     const [senha, setSenha] = useState('');
     const [senhaConfirm, setSenhaConfirm] = useState('');
 
-    const enviar = (event) => {
+    const valida = () => {
+        if(nome.length == 0) {
+            mensagemError("Nome não pode ser vazio");
+            return false;
+        }
+        else if(email.length == 0 || !email.includes("@")) {
+            mensagemError("Digite um e-mail válida");
+            return false;
+        }
+        else if(senha.length == 0 || senha.length > 6) {
+            mensagemError("Digite uma senha válida");
+            return false;
+        }
+        else if(senhaConfirm.length == 0) {
+            mensagemError("Campom de confirmação não pode ser vazio!");
+            return;
+        } else if(senha !== senhaConfirm) {
+            mensagemError("A senha de confirmação deve ser a mesma do campo senha");
+            return false;
+        } 
+        else {
+        return true;
+
+        }
+    }
+
+    const enviar = async (event) => {
         event.preventDefault();
-        console.log({ nome, email, senha, senhaConfirm });
+
+        if(!valida()) {
+            return;
+        }
+
+        let credentials = JSON.stringify({
+            "name": nome,
+            "email": email,
+            "password": senha,
+            "permissions": [ 1 ]
+        });
+
+        try {
+            const response = await authService.cadastrar(credentials);
+            if(response) {
+                navigate("/login");
+            }
+        } catch (e) {   
+            if (e.response && e.response.data && e.response.data.message === 'E-mail already registered!') {
+                mensagemError("Já existe uma conta com esse E-mail ");
+            }
+            
+            if(e.status == 403 || e.status == 500) {
+                mensagemError("Falha ao entrar, por favor tente novamente!");
+            }
+        } 
     }
 
     return (
