@@ -16,7 +16,6 @@ const CadastroLancamento = () => {
     const [valor, setValor] = useState();
     const [tipo, setTipo] = useState('');
     const [status, setStatus] = useState('');
-    const [userId, setUserId] = useState('');
 
     const { id } = useParams();
 
@@ -56,8 +55,6 @@ const CadastroLancamento = () => {
                 setDescricao(result.data.description);
                 setValor(result.data.value);
                 setStatus(result.data.status);
-                setUserId(result.data.user_id);
-
                 setTipo(result.data.type)
                 setMes(result.data.month)
             }
@@ -102,7 +99,31 @@ const CadastroLancamento = () => {
 
     const editar= async (event) => {
         event.preventDefault();
-        console.log("editar");
+
+        if (!valida()) {
+            return;
+        }
+
+        let data = JSON.stringify({
+            "id": id,
+            "description": descricao,
+            "value": valor,
+            "type": tipo,
+            "year": ano,
+            "month": mes
+        });
+
+        try {
+            const response = await lancamentoService.patch("/api/v1/releases", data);
+            if (response) {
+                mensagemSucesso("Lançamento editado com sucesso!")
+                navigate("/lancamentos");
+            }
+        } catch (e) {
+            if (e.response || e.status == 500) {
+                mensagemError("Falha ao editar, por favor tente novamente!");
+            }
+        }
     }
 
     const cadastrar = async (event) => {
