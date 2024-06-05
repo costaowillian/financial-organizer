@@ -45,8 +45,8 @@ public class ReleasesController implements IReleasesController {
     }
 
     @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(Long id) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
@@ -65,7 +65,7 @@ public class ReleasesController implements IReleasesController {
 
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ReleasesDTO> findById(Long id) {
+    public ResponseEntity<ReleasesDTO> findById(@PathVariable(value = "id") Long id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
