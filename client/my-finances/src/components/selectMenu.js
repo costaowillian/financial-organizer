@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const SelectMenu = ({ options, onChange }) => {
-  const [selectedOption, setSelectedOption] = useState('');
+const SelectMenu = ({ options, onChange, value }) => {
+  const [selectedOption, setSelectedOption] = useState(value);
+
+  useEffect(() => {
+    setSelectedOption(value);
+  }, [value]);
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;

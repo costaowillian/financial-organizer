@@ -6,8 +6,11 @@ import lancamentoService from '../../services/lancamentoServices';
 import { mensagemError, mensagemSucesso } from '../../components/toastr';
 
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { useNavigate } from 'react-router-dom';
 
 const Lancamentos = () => {
+
+    const navigate = useNavigate();
 
     const [searchText, setSearchText] = useState('');
 
@@ -50,6 +53,10 @@ const Lancamentos = () => {
         }
     }
 
+    const editar = (id) => {
+        navigate(`/cadastro-lancamentos/${id}`);
+    }
+
     const filteredData = dadosDaTabela.filter(item => item.status.toLowerCase().includes(searchText.toLowerCase()));
 
     return (
@@ -75,7 +82,7 @@ const Lancamentos = () => {
                     </div>
 
                     <div className="bs-component">
-                        {filteredData.length > 0 ? <LancamentoTable data={filteredData} deletarItem={confirmarDeletar} /> : <p>Não há lançamentos para serem exibidos!</p>}
+                        {filteredData.length > 0 ? <LancamentoTable data={filteredData} deletarItem={confirmarDeletar} editarItem={editar} /> : <p>Não há lançamentos para serem exibidos!</p>}
 
                     </div>
                 </div>

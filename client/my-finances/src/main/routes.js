@@ -18,7 +18,8 @@ function Router() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/cadastrar" element={<Cadastrar />} />
                     <Route path="/lancamentos" element={<Lancamentos />} />
-                    <Route path="/cadastro-lancamentos" element={<CadastroLancamentos />} />
+                    <Route path="/cadastro-lancamentos/" element={<CadastroLancamentos />} />
+                    <Route path="/cadastro-lancamentos/:id" element={<CadastroLancamentos />} />
                 </Routes>
             </Suspense>
         </BrowserRouter>
