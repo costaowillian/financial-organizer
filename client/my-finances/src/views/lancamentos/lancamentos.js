@@ -3,6 +3,7 @@ import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 import LancamentoTable from './lancamentoTable';
 import lancamentoService from '../../services/lancamentoServices';
+import { mensagemError } from '../../components/toastr';
 
 const Lancamentos = () => {
 
@@ -12,11 +13,25 @@ const Lancamentos = () => {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    }, []);
+
     const fetchData = async () => {
         const response = await lancamentoService.get("api/v1/releases?page=0&size=50&direction=asc");
-        if (response) {
+        if (response.data._embedded) {
             setDadosDaTabela(response.data._embedded.releasesDTOList);
+        }
+    }
+
+    const deletar = async (id) => {
+        try {
+            await lancamentoService.delete(`/api/v1/releases/${id}`);
+            setDadosDaTabela(dadosDaTabela.filter(item => item.id !== id));
+        } catch (e) {
+            if (e.response && e.response.status === 404) {
+                mensagemError("Por favor, tente novamente!");
+            } else {
+                mensagemError("Ocorreu um erro inesperado!");
+            }
         }
     }
 
@@ -45,7 +60,7 @@ const Lancamentos = () => {
                     </div>
 
                     <div className="bs-component">
-                        {filteredData.length > 0? <LancamentoTable data={filteredData} /> : <p>Não há lançamentos para serem exibidos!</p>}
+                        {filteredData.length > 0? <LancamentoTable data={filteredData} deletarItem={deletar} /> : <p>Não há lançamentos para serem exibidos!</p>}
                         
                     </div>
                 </div>

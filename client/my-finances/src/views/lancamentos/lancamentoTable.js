@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const LancamentoTable = ({data}) => {
+const LancamentoTable = ({ data , deletarItem}) => {
 
     const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const LancamentoTable = ({data}) => {
                             <td>{item.status}</td>
                             <td>
                                 <Link className="btn btn-primary" to='/'>Editar</Link>
-                                <Link className="btn btn-danger" to='/'>Deletar</Link>
+                                <button onClick={e => deletarItem(item.id)} className="btn btn-danger">Deletar</button>
                             </td>
                         </tr>
                     ))}
