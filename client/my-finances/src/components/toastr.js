@@ -27,11 +27,11 @@ export const mensagemError = (mensagem) => {
 }
 
 export const mensagemSucesso = (mensagem) => {
-    notificar("sucesso", mensagem, "=success");
+    notificar("Sucesso", mensagem, "success");
 }
 
 export const mensagemInfo = (mensagem) => {
-    notificar("sucesso", mensagem, "info");
+    notificar("Sucesso", mensagem, "info");
 }
 
 export const mensagemAlerta = (mensagem) => {

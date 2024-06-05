@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 import LancamentoTable from './lancamentoTable';
 import lancamentoService from '../../services/lancamentoServices';
-import { mensagemError } from '../../components/toastr';
+import { mensagemError, mensagemSucesso } from '../../components/toastr';
+
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 const Lancamentos = () => {
 
@@ -22,11 +24,24 @@ const Lancamentos = () => {
         }
     }
 
+    const confirmarDeletar = (id) => {
+        confirmDialog({
+            message: 'Deseja deletar o lançamento?',
+            header: 'Deletar lançamento',
+            icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
+            acceptClassName: 'p-button-danger',
+            accept: () => deletar(id),
+        });
+    };
+
     const deletar = async (id) => {
         try {
             await lancamentoService.delete(`/api/v1/releases/${id}`);
             setDadosDaTabela(dadosDaTabela.filter(item => item.id !== id));
+            mensagemSucesso("Lançamento Deletado com sucesso!");
         } catch (e) {
+            console.log(e)
             if (e.response && e.response.status === 404) {
                 mensagemError("Por favor, tente novamente!");
             } else {
@@ -60,11 +75,12 @@ const Lancamentos = () => {
                     </div>
 
                     <div className="bs-component">
-                        {filteredData.length > 0? <LancamentoTable data={filteredData} deletarItem={deletar} /> : <p>Não há lançamentos para serem exibidos!</p>}
-                        
+                        {filteredData.length > 0 ? <LancamentoTable data={filteredData} deletarItem={confirmarDeletar} /> : <p>Não há lançamentos para serem exibidos!</p>}
+
                     </div>
                 </div>
             </div>
+            <ConfirmDialog />
         </>
     );
 };

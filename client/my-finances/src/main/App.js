@@ -4,6 +4,9 @@ import Router from '../main/routes'
 
 import 'toastr/build/toastr.css';
 import 'toastr/build/toastr.min.js';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 
 function App() {
   return (<>
