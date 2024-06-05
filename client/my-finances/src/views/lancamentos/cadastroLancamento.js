@@ -138,7 +138,7 @@ const CadastroLancamento = () => {
 
     return (
         <>
-            <Card title="Cadastrar um novo lançamento">
+            <Card title={id ? "Editar Lançamento" : "Cadastrar um novo lançamento"}>
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="bs-component">
