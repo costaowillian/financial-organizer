@@ -6,6 +6,7 @@ const Login = lazy(() => import('../views/login'));
 const Cadastrar = lazy(() => import('../views/cadastrar'));
 const Home = lazy(() => import('../views/home'));
 const Lancamentos = lazy(() => import('../views/lancamentos/lancamentos'));
+const CadastroLancamentos = lazy(() => import('../views/lancamentos/cadastroLancamento'));
 
 function Router() {
     return (
@@ -17,6 +18,7 @@ function Router() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/cadastrar" element={<Cadastrar />} />
                     <Route path="/lancamentos" element={<Lancamentos />} />
+                    <Route path="/cadastro-lancamentos" element={<CadastroLancamentos />} />
                 </Routes>
             </Suspense>
         </BrowserRouter>

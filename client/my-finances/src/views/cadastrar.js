@@ -8,7 +8,7 @@ import { mensagemError } from "../components/toastr";
 
 const Cadastrar = () => {
 
-    const navigate = useNavigate([]);
+    const navigate = useNavigate();
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
