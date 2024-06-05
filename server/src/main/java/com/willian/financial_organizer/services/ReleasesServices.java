@@ -101,17 +101,15 @@ public class ReleasesServices  implements IReleasesServices {
         BigDecimal profit = BigDecimal.ZERO;
         BigDecimal expenses = BigDecimal.ZERO;
 
-        if(findRelease(id) != null) {
-            BigDecimal profitResult = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.RECEITAS);
-            BigDecimal expensesResult = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.DESPESAS);
+        BigDecimal profitResult = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.RECEITAS);
+        BigDecimal expensesResult = repository.getBalanceByTypeReleaseAndUser(id, ReleasesTypes.DESPESAS);
 
-            if (profitResult != null) {
-                profit = profitResult;
-            }
+        if (profitResult != null) {
+            profit = profitResult;
+        }
 
-            if (expensesResult != null) {
-                expenses = expensesResult;
-            }
+        if (expensesResult != null) {
+            expenses = expensesResult;
         }
 
         return profit.subtract(expenses);
