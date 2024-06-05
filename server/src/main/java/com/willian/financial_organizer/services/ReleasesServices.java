@@ -200,6 +200,7 @@ public class ReleasesServices  implements IReleasesServices {
 
     private void isAllowed(ReleasesDTO releasesDTO) throws Exception {
         Set<String> validFields = new HashSet<>();
+        validFields.add("id");
         validFields.add("description");
         validFields.add("month");
         validFields.add("value");
