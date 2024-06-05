@@ -45,8 +45,37 @@ const CadastroLancamento = () => {
         setMes(selectedValue);
     };
 
+    const valida = () => {
+        if(descricao.length == 0) {
+            mensagemError("Descrição não pode ser vazio");
+            return false;
+        }
+        else if(tipo == null ) {
+            mensagemError("Selecione um tipo");
+            return false;
+        }
+        else if(valor == null) {
+            mensagemError("Valor não pode ser vazio");
+            return false;
+        }
+        else if(mes == null) {
+            mensagemError("Selecione um mês!");
+            return;
+        } else if(ano == null) {
+            mensagemError("Selecione um ano");
+            return false;
+        } 
+        else {
+        return true;
+
+        }
+    }
     const cadastrar = async (event) => {
         event.preventDefault();
+
+        if(!valida()) {
+            return;
+        }
 
         const userData = JSON.parse(localStorage.getItem("user_data"));
 
