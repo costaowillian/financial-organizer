@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../context/authContex";
 
 const NavBar = () => {
 
+    const navigate = useNavigate();
     const auth = useContext(Context);
+
+    const sair = () => {
+        auth.logout();
+        navigate("/login");
+    }
 
     return (
         <>
@@ -22,6 +28,9 @@ const NavBar = () => {
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/lancamentos">Lançamentos</Link>
+                        </li>
+                        <li className="nav-item">
+                            <button className="nav-link" onClick={sair}>sair</button>
                         </li>
                     </ul>
                 </div> : ""}
