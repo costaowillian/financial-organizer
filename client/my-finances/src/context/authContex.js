@@ -10,7 +10,7 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const data = localStorage.getItem('user_data');
-        if(data && JSON.parse(data).accessToken) {
+        if(data && JSON.parse(data).accessToken && isTokenValid(JSON.parse(data).accessToken)) {
             setIsAuthenticated(true);
         } else {
             setIsAuthenticated(false);
@@ -36,8 +36,22 @@ const AuthProvider = ({children}) => {
         setIsAuthenticated(false);
     }
 
+    const isTokenValid = (token) => {    
+        try {
+            const decodedToken = jwtDecode(token);
+            const currentTime = Date.now() / 1000; 
+            
+            if (decodedToken.exp && decodedToken.exp < currentTime) {
+                return false; 
+            }
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
     return (
-        <Context.Provider value={{ isAuthenticated, login, loading, logout }}>
+        <Context.Provider value={{ isAuthenticated, login, loading, logout, isTokenValid }}>
             {children}
         </Context.Provider>
     )

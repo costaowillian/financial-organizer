@@ -40,7 +40,7 @@ function Router() {
 
 function CustomRoute({ children }) {
     const auth = useContext(Context);
-    return auth.isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
+    return auth.isAuthenticated && auth.isTokenValid ? <>{children}</> : <Navigate to="/login" />;
 }
 
 export default Router;
