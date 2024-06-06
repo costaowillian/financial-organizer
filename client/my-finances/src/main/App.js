@@ -8,12 +8,15 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
+import { AuthProvider } from '../context/authContex';
+
 function App() {
   return (<>
-    <div className="container">
-      <Router />
-    </div>
-
+    <AuthProvider>
+      <div className="container">
+        <Router />
+      </div>
+    </AuthProvider>
   </>);
 }
 
