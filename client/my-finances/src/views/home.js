@@ -35,7 +35,8 @@ const Home = () => {
                 <hr className="my-4" />
                 <p>E essa é sua área administrativa</p>
                 <p className="lead">
-                    <Link className="btn btn-primary btn-lg" to="/cadastro-lancamentos" role="button"><i className="fa fa-users"></i>Cadastrar Lançamento</Link>
+                    <Link className="btn btn-primary btn-lg" to="/cadastro-lancamentos" style={{ marginRight: '8px' }} role="button">Cadastrar Lançamento</Link>
+                    <Link className="btn btn-primary btn-lg" to="/cadastro-lancamentos" role="button">Cadastrar usuário</Link>
                 </p>
             </div>
         </>
