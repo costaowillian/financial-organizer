@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../context/authContex";
 
 const NavBar = () => {
+
+    const auth = useContext(Context);
 
     return (
         <>
@@ -11,16 +14,18 @@ const NavBar = () => {
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
+                    {auth.isAuthenticated ? 
                     <div className="collapse navbar-collapse" id="navbarResponsive">
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/">Home</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/lancamentos">Lançamentos</Link>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/">Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/lancamentos">Lançamentos</Link>
+                        </li>
+                    </ul>
+                </div> : ""}
+                    
                 </div>
             </div>
         </>
