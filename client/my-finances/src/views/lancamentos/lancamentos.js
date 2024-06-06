@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 import LancamentoTable from './lancamentoTable';
@@ -18,7 +18,7 @@ const Lancamentos = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [dadosDaTabela]);
 
     const fetchData = async () => {
         const response = await lancamentoService.get("api/v1/releases?page=0&size=50&direction=asc");
@@ -38,13 +38,64 @@ const Lancamentos = () => {
         });
     };
 
+    const confirmarEfetivacao = (id) => {
+        confirmDialog({
+            message: 'Deseja efetivar este lançamento?',
+            header: 'Efetivar lançamento',
+            icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
+            acceptClassName: 'p-button-danger',
+            accept: () => efetivar(id),
+        });
+    };
+
+    const efetivar = async (id) => {
+        try {
+            await lancamentoService.put(`/api/v1/releases/${id}`, "EFETIVADO");
+            dadosDaTabela.map(x => {
+                if (x.id == id) {
+                    x.status = "EFETIVADO"
+                }
+            });
+            mensagemSucesso("Lançamento efetivado com sucesso!");
+        }
+        catch (e) {
+            mensagemError("Por favor, tente novamente!");
+        }
+    }
+
+    const confirmarCancelamento = (id) => {
+        confirmDialog({
+            message: 'Deseja cancelar este lançamento?',
+            header: 'cancelar lançamento',
+            icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
+            acceptClassName: 'p-button-danger',
+            accept: () => cancelar(id),
+        });
+    };
+
+    const cancelar = async (id) => {
+        try {
+            await lancamentoService.put(`/api/v1/releases/${id}`, "CANCELADO");
+            dadosDaTabela.map(x => {
+                if (x.id == id) {
+                    x.status = "CANCELADO"
+                }
+            });
+            mensagemSucesso("Lançamento cancelado com sucesso!");
+        }
+        catch (e) {
+            mensagemError("Por favor, tente novamente!");
+        }
+    }
+
     const deletar = async (id) => {
         try {
             await lancamentoService.delete(`/api/v1/releases/${id}`);
             setDadosDaTabela(dadosDaTabela.filter(item => item.id !== id));
             mensagemSucesso("Lançamento Deletado com sucesso!");
         } catch (e) {
-            console.log(e)
             if (e.response && e.response.status === 404) {
                 mensagemError("Por favor, tente novamente!");
             } else {
@@ -82,7 +133,9 @@ const Lancamentos = () => {
                     </div>
 
                     <div className="bs-component">
-                        {filteredData.length > 0 ? <LancamentoTable data={filteredData} deletarItem={confirmarDeletar} editarItem={editar} /> : <p>Não há lançamentos para serem exibidos!</p>}
+                        {filteredData.length > 0 ? <LancamentoTable data={filteredData}
+                            deletarItem={confirmarDeletar} editarItem={editar}
+                            efetivarItem={confirmarEfetivacao} cancelarItem={confirmarCancelamento} /> : <p>Não há lançamentos para serem exibidos!</p>}
 
                     </div>
                 </div>

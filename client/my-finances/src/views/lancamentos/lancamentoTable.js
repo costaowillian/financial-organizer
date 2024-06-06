@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const LancamentoTable = ({ data, deletarItem, editarItem }) => {
+const LancamentoTable = ({ data, deletarItem, editarItem, efetivarItem, cancelarItem }) => {
 
     const navigate = useNavigate();
 
@@ -16,6 +16,7 @@ const LancamentoTable = ({ data, deletarItem, editarItem }) => {
                         <th scope="col">Data</th>
                         <th scope="col">Situação</th>
                         <th scope="col">Ações</th>
+                        <th scope="col">Alterar Situação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,10 @@ const LancamentoTable = ({ data, deletarItem, editarItem }) => {
                             <td>
                                 <button className="btn btn-primary" onClick={e => editarItem(item.id)}>Editar</button>
                                 <button onClick={e => deletarItem(item.id)} className="btn btn-danger">Deletar</button>
+                            </td>
+                            <td>
+                                <button className="btn btn-primary" onClick={e=> efetivarItem(item.id)}>Efetivar</button>
+                                <button className="btn btn-danger" onClick={e=> cancelarItem(item.id)}>Cancelar</button>
                             </td>
                         </tr>
                     ))}
