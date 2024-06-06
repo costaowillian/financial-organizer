@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Card from '../components/card';
 import FormGroup from "../components/form-group";
-import authService from "../services/authServices";
 
 import { mensagemError } from '../components/toastr';
 import { useNavigate } from "react-router-dom";
+import { Context } from "../context/authContex";
 
 const Login = () => {
 
     const navigate = useNavigate([]);
+    const { login } = useContext(Context);
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -21,10 +22,8 @@ const Login = () => {
         });
         
         try {
-            const response = await authService.login(credentials);
-            if(response) {
-                navigate("/");
-            }
+            await login(credentials);
+            navigate("/")
         } catch (e) {   
             if (e.response && e.response.data && e.response.data.message === 'Invalid email/password supplied') {
                 mensagemError("Email ou senha inválidos, por favor tente novamente");
