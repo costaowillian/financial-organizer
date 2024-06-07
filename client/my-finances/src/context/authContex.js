@@ -39,6 +39,12 @@ const AuthProvider = ({children}) => {
         setIsAuthenticated(false);
     }
 
+    const getUserId = () => {
+        const token = localStorage.getItem('token');
+        const decodedToken = jwtDecode(token);
+        return decodedToken.userId;
+    }
+
     const isTokenValid = (token) => {    
         try {
             const decodedToken = jwtDecode(token);

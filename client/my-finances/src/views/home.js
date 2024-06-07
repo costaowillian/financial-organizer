@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../services/userSerivces';
+import { Context } from '../context/authContex';
 
 const Home = () => {
 
-    const [saldo, setSaldo] = useState(0.00);
+    const auth = useContext(Context);
 
-    const userData = JSON.parse(localStorage.getItem('user_data'));
+    const [saldo, setSaldo] = useState(0.00);
 
     const fetchSaldo = async () => {
         try {
-            const result = await userService.get(`/api/v1/user/${userData.userId}/balance`);
+            const result = await userService.get(`/api/v1/user/${auth.getUserId()}/balance`);
             setSaldo(result.data);
         } catch (e) {
             if(e.status == 404 || e.status == 500) {
