@@ -11,10 +11,11 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const data = localStorage.getItem('user_data');
-        if(data && JSON.parse(data).accessToken && isTokenValid(JSON.parse(data).accessToken)) {
+        const token = localStorage.getItem('token');
+        if(token != null && isTokenValid(token)) {
             setIsAuthenticated(true);
         } else {
+            console.log("deu else")
             logout();
         }
         setLoading(false);
@@ -25,7 +26,7 @@ const AuthProvider = ({children}) => {
             const response = await api.post('/auth/signin', credentials);
 
             if(response) {
-                localStorage.setItem('user_data', JSON.stringify(response.data));
+                localStorage.setItem('token', response.data.accessToken);
                 setIsAuthenticated(true);
             }  
         } catch (error) {
@@ -34,7 +35,7 @@ const AuthProvider = ({children}) => {
     }
 
     const logout = () => {
-        localStorage.removeItem('user_data');
+        localStorage.removeItem('token');
         setIsAuthenticated(false);
     }
 
@@ -53,7 +54,7 @@ const AuthProvider = ({children}) => {
     }
 
     return (
-        <Context.Provider value={{ isAuthenticated, login, loading, logout, isTokenValid }}>
+        <Context.Provider value={{ isAuthenticated, login, loading, logout, isTokenValid, getUserId }}>
             {children}
         </Context.Provider>
     )
