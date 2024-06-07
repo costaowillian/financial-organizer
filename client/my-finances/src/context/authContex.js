@@ -15,7 +15,7 @@ const AuthProvider = ({children}) => {
         if(data && JSON.parse(data).accessToken && isTokenValid(JSON.parse(data).accessToken)) {
             setIsAuthenticated(true);
         } else {
-            setIsAuthenticated(false);
+            logout();
         }
         setLoading(false);
     }, []);
