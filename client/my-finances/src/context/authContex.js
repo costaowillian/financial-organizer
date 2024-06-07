@@ -12,10 +12,9 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if(token != null && isTokenValid(token)) {
+        if(token && isTokenValid(token)) {
             setIsAuthenticated(true);
         } else {
-            console.log("deu else")
             logout();
         }
         setLoading(false);

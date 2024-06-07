@@ -15,13 +15,14 @@ function Router() {
             <NavBar />
             <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/cadastrar" element={<Cadastrar />} />
-
                     <Route path="/" element={
                         <CustomRoute>
                             <Home />
                         </CustomRoute>} />
+
+                    <Route path="/login" element={<Login />} />
+
+                    <Route path="/cadastrar" element={<Cadastrar />} />
 
                     <Route path="/lancamentos" element={
                         <CustomRoute>
@@ -40,7 +41,9 @@ function Router() {
 
 function CustomRoute({ children }) {
     const auth = useContext(Context);
-    return auth.isAuthenticated && auth.isTokenValid ? <>{children}</> : <Navigate to="/login" />;
+    if(!auth.loading) {
+        return auth.isAuthenticated && auth.isTokenValid ? <>{children}</> : <Navigate to="/login" />;
+    }
 }
 
 export default Router;
