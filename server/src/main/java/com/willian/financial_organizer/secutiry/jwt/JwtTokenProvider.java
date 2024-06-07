@@ -50,10 +50,9 @@ public class JwtTokenProvider {
     public TokenDTO createAccessToken(String email, List<String> roles) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
-        String accessToken = getAccessToken(email, roles, now, validity);
-        String refreshToken = getRefreshToken(email, roles, now);
-
         User user = userRepository.findByEmail(email).get();
+        String accessToken = getAccessToken(email, user.getId(), roles, now, validity);
+        String refreshToken = getRefreshToken(email, roles, now);
 
         return  new TokenDTO(email, user.getId(), true, now, validity, accessToken, refreshToken);
     }
@@ -77,10 +76,10 @@ public class JwtTokenProvider {
                 .sign(algorithm).strip();
     }
 
-    private String getAccessToken(String email, List<String> roles, Date now, Date validity) {
+    private String getAccessToken(String email, Long userId, List<String> roles, Date now, Date validity) {
         String issueUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
 
-        return JWT.create().withClaim("roles", roles).withIssuedAt(now).withExpiresAt(validity).withSubject(email).withIssuer(issueUrl)
+        return JWT.create().withClaim("roles", roles).withClaim("userId", userId).withIssuedAt(now).withExpiresAt(validity).withSubject(email).withIssuer(issueUrl)
                 .sign(algorithm).strip();
     }
 
