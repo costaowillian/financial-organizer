@@ -17,6 +17,7 @@
 		<java.version>21</java.version>
 		<java-jwt.version>3.18.3</java-jwt.version>
 		<springdoc.version>2.5.0</springdoc.version>
+		<rest-assured.version>5.2.0</rest-assured.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -67,6 +68,13 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${rest-assured.version}</version>
 			<scope>test</scope>
 		</dependency>
 
