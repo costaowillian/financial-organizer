@@ -1,0 +1,1 @@
+INSERT INTO `user_permission` VALUES (1,1),(1,2);
