@@ -5,7 +5,9 @@ import com.willian.financial_organizer.dtos.CreateUserDTO;
 import com.willian.financial_organizer.dtos.UserResponseDTO;
 import com.willian.financial_organizer.exceptions.DuplicateResourceException;
 import com.willian.financial_organizer.exceptions.RequiredObjectIsNullException;
+import com.willian.financial_organizer.model.Permission;
 import com.willian.financial_organizer.model.User;
+import com.willian.financial_organizer.repositories.PermissionsRepository;
 import com.willian.financial_organizer.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +18,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -43,11 +49,10 @@ public class UserServicesTest {
     void testGivenUser_WhenCrete_ShouldReturnAUserObject() {
     	//Given / Arrange
         when(repository.existsByEmail(anyString())).thenReturn(false);
-        when(repository.save(user)).thenReturn(user);
+        when(repository.save(any(User.class))).thenReturn(user);
 
     	//When / Act
         UserResponseDTO savedUser = service.createUser(new CreateUserDTO(user));
-        System.out.print(savedUser.toString());
 
     	//Then /Assert
         assertNotNull(savedUser, () -> "Should not return null");
