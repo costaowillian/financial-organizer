@@ -49,12 +49,12 @@ public class AuthController implements IAuthController {
     }
 
     @Override
-    @PutMapping(value = "/refresh", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity refreshToken(@RequestHeader("email") String email, @RequestHeader("refreshToken")String refreshToken) {
+    @PutMapping(value = "/refresh/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity refreshToken(@PathVariable("username") String userName, @RequestHeader("Authorization")String refreshToken) {
 
-        if(checkIfParamsIsNotNull(email, refreshToken)) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Client Request!");
+        if(checkIfParamsIsNotNull(userName, refreshToken)) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Client Request!");
 
-        var token = authServices.refreshToken(email,refreshToken);
+        var token = authServices.refreshToken(userName,refreshToken);
 
         if(token == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Client Request!");
