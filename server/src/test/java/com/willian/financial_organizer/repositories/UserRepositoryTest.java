@@ -1,5 +1,6 @@
 package com.willian.financial_organizer.repositories;
 
+import com.willian.financial_organizer.integrationsTest.testContainers.AbstractIntegrationTest;
 import com.willian.financial_organizer.model.User;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
-public class UserRepositoryTest {
+public class UserRepositoryTest extends AbstractIntegrationTest {
 
     @Autowired
     UserRepository repository;
@@ -58,8 +59,6 @@ public class UserRepositoryTest {
         user.setEmail("willian@gmail.com");
         user.setName("Willian Costa");
         user.setPassword("password");
-
-        repository.save(user);
 
         //When / Act
         User result = repository.findByEmail(user.getEmail()).get();
