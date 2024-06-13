@@ -1,4 +1,4 @@
-# Financial Organizar
+# Financial Organizer
 
 O projeto consiste em um aplicativo web para registro de entradas e saídas de um negócio, possibilitando visualizar, cadastrar, marcar como efetivado, pendente e cancelado em todas as despesas e rendas cadastradas.
 
